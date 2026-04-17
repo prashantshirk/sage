@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
@@ -11,7 +11,9 @@ import {
   CheckSquare,
   DollarSign,
   Loader2,
-  ArrowRight
+  ArrowRight,
+  Paperclip,
+  ImageIcon
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -26,6 +28,10 @@ export default function AskSagePage() {
   const [recentTasks, setRecentTasks] = useState<any[]>([]);
   const [recentExpenses, setRecentExpenses] = useState<any[]>([]);
   const [loadingInitial, setLoadingInitial] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
+  const [imageMimeType, setImageMimeType] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -60,15 +66,41 @@ export default function AskSagePage() {
     }
   }, [result]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    setSelectedFile(file);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64String = event.target?.result as string;
+      const mimeType = base64String.match(/data:(.*?);/)?.[1] || "image/jpeg";
+      const base64Data = base64String.split(',')[1];
+      setImageBase64(base64Data);
+      setImageMimeType(mimeType);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearFile = () => {
+    setSelectedFile(null);
+    setImageBase64(null);
+    setImageMimeType(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const handleSubmit = async () => {
-    if (!inputText.trim()) return;
+    if (!inputText.trim() && !imageBase64) return;
     
     setIsLoading(true);
     setResult(null);
     try {
-      const res = await processNaturalLanguage(inputText);
+      const res = await processNaturalLanguage(inputText, imageBase64 || undefined, imageMimeType || undefined);
       setResult(res);
       setInputText("");
+      setSelectedFile(null);
+      setImageBase64(null);
+      setImageMimeType(null);
       
       const [tasksRes, expensesRes] = await Promise.all([
         getTodaysTasks().catch(() => []),
@@ -122,12 +154,40 @@ export default function AskSagePage() {
               }}
             />
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground font-medium">
-                {inputText.length} / 500
-              </span>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-full bg-secondary/50 hover:bg-secondary text-muted-foreground"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isLoading}
+                >
+                  <Paperclip className="w-5 h-5" />
+                </Button>
+                <input 
+                  type="file" 
+                  accept="image/*,application/pdf" 
+                  className="hidden" 
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                />
+                <span className="text-sm text-muted-foreground font-medium">
+                  {inputText.length} / 500
+                </span>
+                
+                {selectedFile && (
+                  <div className="flex items-center gap-2 bg-primary/10 text-primary px-3 py-1.5 rounded-full text-xs font-medium">
+                    <ImageIcon className="w-3.5 h-3.5" />
+                    <span className="truncate max-w-[150px]">{selectedFile.name}</span>
+                    <button onClick={clearFile} className="hover:text-primary/70 ml-1">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
               <Button 
                 onClick={handleSubmit} 
-                disabled={!inputText.trim() || isLoading}
+                disabled={(!inputText.trim() && !imageBase64) || isLoading}
                 size="lg"
                 className="gap-2 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white shadow-md transition-all hover:scale-105"
               >

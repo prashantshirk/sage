@@ -66,3 +66,54 @@ Guidelines:
 - Use 2-3 short paragraphs. Do not use bullet points."""
 
     return call_gemini(prompt, max_tokens=800)
+
+import base64
+import json
+
+def extract_data_from_image(image_base64, user_prompt, mime_type="image/jpeg"):
+    try:
+        api_key = current_app.config.get("GEMINI_API_KEY")
+        if not api_key:
+            return None
+            
+        genai.configure(api_key=api_key)
+        # Use the specific lite model as requested
+        model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
+        
+        image_data = base64.b64decode(image_base64)
+        
+        today = datetime.now(timezone.utc).strftime("%B %d, %Y")
+        system_prompt = f"""You are a data extraction AI. Today's date is {today}.
+Extract structured data from the provided document image/PDF and the user's prompt. 
+Return ONLY valid JSON with no explanation or markdown formatting.
+Identify the action as 'add_expense' or 'add_task'. If it is a bill/receipt, use 'add_expense'.
+
+For add_expense return: {{ "action": "add_expense", "name": "", "amount": 0, "due_date": "", "category": "bill", "notes": "" }}
+If a due date is not explicitly found, try to infer it from the user's prompt or the document, else leave empty. Use absolute dates (YYYY-MM-DD or readable).
+User prompt: {user_prompt}
+"""
+        
+        print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Document Extraction", flush=True)
+        response = model.generate_content([
+            {'mime_type': mime_type, 'data': image_data},
+            system_prompt
+        ])
+        
+        text = response.text.strip()
+        if text.startswith("```json"):
+            text = text[7:]
+        if text.startswith("```"):
+            text = text[3:]
+        if text.endswith("```"):
+            text = text[:-3]
+            
+        parsed = json.loads(text.strip())
+        
+        with open("gemini_debug.log", "a", encoding="utf-8") as f:
+            f.write(f"\n--- [{datetime.now()}] Document Extraction ---\n")
+            f.write(f"Response: {text}\n")
+            
+        return parsed
+    except Exception as e:
+        print(f"Gemini Image Processing Error: {e}")
+        return None

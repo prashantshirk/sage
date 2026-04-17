@@ -425,3 +425,295 @@
 2026-04-17 23:45:05,894 [INFO] 127.0.0.1 - - [17/Apr/2026 23:45:05] "GET /api/finance/summary HTTP/1.1" 200 -
 2026-04-17 23:48:31,842 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\routes\\finance.py', reloading
 2026-04-17 23:48:32,532 [INFO]  * Restarting with stat
+2026-04-17 23:48:33,595 [INFO] Sage Backend Starting...
+2026-04-17 23:48:38,407 [WARNING]  * Debugger is active!
+2026-04-17 23:48:38,415 [INFO]  * Debugger PIN: 814-934-938
+2026-04-17 23:49:03,993 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:03] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-17 23:49:04,630 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:04] "GET /auth/me HTTP/1.1" 200 -
+2026-04-17 23:49:04,690 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:04] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:05,006 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:05] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-17 23:49:05,021 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:05] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-17 23:49:05,339 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:05] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:06,013 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:06] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:06,015 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:06] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-17 23:49:06,748 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:06] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-17 23:49:21,764 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:21,768 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:21,769 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:21,772 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:21,773 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:21,776 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:21] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:22,091 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:22,148 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:22,412 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:22,503 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:22,588 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:22,911 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:22] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:25,155 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:25] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-17 23:49:25,161 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:25] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-17 23:49:25,244 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:25] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:25,330 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:25] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:25,520 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-17 23:49:25,520 [INFO]   - Google Access Token present: True
+2026-04-17 23:49:25,520 [INFO]   - Fetching Calendar events...
+2026-04-17 23:49:25,872 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:25] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:26,444 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:26] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:27,481 [INFO]   - Fetching Gmail messages...
+2026-04-17 23:49:27,485 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-17 23:49:32,761 [INFO]   - Scanning 5 emails for action items...
+2026-04-17 23:49:34,921 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 23:49:34,991 [INFO]   - Generating briefing using Groq...
+2026-04-17 23:49:40,151 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 23:49:40,424 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:40] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-17 23:49:40,494 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-17 23:49:40,494 [INFO]   - Google Access Token present: True
+2026-04-17 23:49:40,494 [INFO]   - Fetching Calendar events...
+2026-04-17 23:49:42,400 [INFO]   - Fetching Gmail messages...
+2026-04-17 23:49:42,404 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-17 23:49:46,159 [INFO]   - Scanning 5 emails for action items...
+2026-04-17 23:49:47,501 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 23:49:47,504 [INFO]   - Generating briefing using Groq...
+2026-04-17 23:49:51,735 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:51] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:51,736 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:51] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:51,737 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:51] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:51,738 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:51] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:51,739 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:51] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:52,060 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:52,062 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:52,268 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:52,385 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-17 23:49:52,642 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:52,860 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:52] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-17 23:49:53,089 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:53] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-17 23:49:54,147 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 23:49:54,150 [INFO] 127.0.0.1 - - [17/Apr/2026 23:49:54] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:12:43,617 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\config.py', reloading
+2026-04-18 00:12:44,332 [INFO]  * Restarting with stat
+2026-04-18 00:12:45,312 [INFO] Sage Backend Starting...
+2026-04-18 00:12:48,374 [WARNING]  * Debugger is active!
+2026-04-18 00:12:48,381 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:13:08,268 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:08] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:13:08,269 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:08] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:08,270 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:08] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:09,033 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:13:09,033 [INFO]   - Google Access Token present: True
+2026-04-18 00:13:09,033 [INFO]   - Fetching Calendar events...
+2026-04-18 00:13:09,817 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:09] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:09,832 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:09] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:10,836 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:13:10,838 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:13:14,166 [INFO]   - Scanning 5 emails for action items...
+2026-04-18 00:13:15,533 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 00:13:15,557 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:13:17,832 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:17] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:13:40,520 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:40] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 00:13:41,128 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:13:41,206 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:13:41,526 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:41,528 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:41,529 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:13:41,530 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:41,531 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:41,850 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:13:41,926 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:41] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:42,024 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:42] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:42,486 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:42] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:42,831 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:42] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:43,273 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:43] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:13:43,277 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:43] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:13:43,327 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:43] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:43,573 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:13:43,573 [INFO]   - Google Access Token present: True
+2026-04-18 00:13:43,574 [INFO]   - Fetching Calendar events...
+2026-04-18 00:13:43,697 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:43] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:43,698 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:43] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:13:44,088 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:44] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:13:45,022 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:13:45,024 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:13:49,661 [INFO]   - Scanning 5 emails for action items...
+2026-04-18 00:13:50,958 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 00:13:50,961 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:13:54,070 [INFO] 127.0.0.1 - - [18/Apr/2026 00:13:54] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:13:54,477 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:13:54,478 [INFO]   - Google Access Token present: True
+2026-04-18 00:13:54,478 [INFO]   - Fetching Calendar events...
+2026-04-18 00:13:55,669 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:13:55,673 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:14:00,085 [INFO]   - Scanning 5 emails for action items...
+2026-04-18 00:14:01,332 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 00:14:01,335 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:14:03,388 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:03] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:14:09,766 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:14:09,767 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:14:09,768 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:14:09,769 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:14:09,770 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:14:09,770 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:09] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:14:10,090 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:14:10,146 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:14:10,225 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:14:10,414 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:14:10,528 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:14:10,619 [INFO] 127.0.0.1 - - [18/Apr/2026 00:14:10] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:16:53,993 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:53] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:16:53,994 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:53] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:16:53,995 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:53] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:16:53,996 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:53] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:16:54,529 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:54] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:16:54,622 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:54] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:16:55,004 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:55] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:16:55,204 [INFO] 127.0.0.1 - - [18/Apr/2026 00:16:55] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:28,942 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:28] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 00:21:29,050 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 00:21:29,248 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:21:29,325 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:21:29,650 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:29,651 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:21:29,680 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:29,681 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:21:29,711 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:21:29,712 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:21:29,957 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:29,958 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:21:29,988 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:21:29,989 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:29] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:30,237 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:21:30,300 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:21:30,301 [INFO]   - Google Access Token present: True
+2026-04-18 00:21:30,301 [INFO]   - Fetching Calendar events...
+2026-04-18 00:21:30,338 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:21:30,385 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:30,606 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:21:30,747 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:30,864 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:30] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:31,101 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:31] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:21:31,260 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:31] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:21:31,386 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:21:31,389 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:21:35,713 [INFO]   - Scanning 5 emails for action items...
+2026-04-18 00:21:36,696 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 00:21:36,699 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:21:39,164 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:39] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:21:39,499 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:21:39,499 [INFO]   - Google Access Token present: True
+2026-04-18 00:21:39,499 [INFO]   - Fetching Calendar events...
+2026-04-18 00:21:44,051 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:21:44,054 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:21:47,483 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 00:21:47,483 [INFO]   - No emails found in fetch range.
+2026-04-18 00:21:47,484 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:21:49,507 [INFO] 127.0.0.1 - - [18/Apr/2026 00:21:49] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:22:05,656 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:05] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 00:22:05,930 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:05] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:22:06,027 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:22:06,334 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:22:06,335 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:22:06,337 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:22:06,340 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:22:06,343 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:22:06,658 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:22:06,702 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:06] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:22:07,012 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:07] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:22:07,058 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:07] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:22:07,462 [INFO] 127.0.0.1 - - [18/Apr/2026 00:22:07] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:22:22,803 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\routes\\nlp.py', reloading
+2026-04-18 00:22:25,567 [INFO]  * Restarting with stat
+2026-04-18 00:22:26,490 [INFO] Sage Backend Starting...
+2026-04-18 00:22:31,449 [WARNING]  * Debugger is active!
+2026-04-18 00:22:31,456 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:22:44,070 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\services\\gemini_service.py', reloading
+2026-04-18 00:22:44,746 [INFO]  * Restarting with stat
+2026-04-18 00:22:45,699 [INFO] Sage Backend Starting...
+2026-04-18 00:22:48,669 [WARNING]  * Debugger is active!
+2026-04-18 00:22:48,677 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:23:05,460 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\services\\nlp_parser.py', reloading
+2026-04-18 00:23:06,153 [INFO]  * Restarting with stat
+2026-04-18 00:23:07,068 [INFO] Sage Backend Starting...
+2026-04-18 00:23:12,054 [WARNING]  * Debugger is active!
+2026-04-18 00:23:12,061 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:23:28,865 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\services\\nlp_parser.py', reloading
+2026-04-18 00:23:29,535 [INFO]  * Restarting with stat
+2026-04-18 00:23:30,469 [INFO] Sage Backend Starting...
+2026-04-18 00:23:35,402 [WARNING]  * Debugger is active!
+2026-04-18 00:23:35,409 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:26:46,512 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:46] "OPTIONS /api/nlp/process HTTP/1.1" 200 -
+2026-04-18 00:26:50,029 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:50] "POST /api/nlp/process HTTP/1.1" 200 -
+2026-04-18 00:26:50,036 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:50] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:26:50,343 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:50] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:26:50,475 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:50] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:26:51,295 [INFO] 127.0.0.1 - - [18/Apr/2026 00:26:51] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:27:00,779 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:00] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:27:00,780 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:00] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:27:00,781 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:00] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:27:00,782 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:00] "OPTIONS /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:27:01,165 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:01] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:27:01,694 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:01] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:27:02,251 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:02] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:27:02,923 [INFO] 127.0.0.1 - - [18/Apr/2026 00:27:02] "GET /api/finance/summary HTTP/1.1" 200 -
+2026-04-18 00:29:20,285 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:29:20,287 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:29:20,288 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:29:20,288 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:29:20,289 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:29:20,290 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:29:20,605 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:29:20,911 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:29:20,966 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:20] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:29:21,034 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:21] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:29:21,627 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:21] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:29:21,871 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:21] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:29:47,437 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:47] "OPTIONS /api/nlp/process HTTP/1.1" 200 -
+2026-04-18 00:29:48,835 [INFO] 127.0.0.1 - - [18/Apr/2026 00:29:48] "[31m[1mPOST /api/nlp/process HTTP/1.1[0m" 400 -
+2026-04-18 00:30:33,870 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:33] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:34,177 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:34] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:34,178 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:34] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:34,179 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:34] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:34,648 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:34] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:34,812 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:34] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:46,626 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:46] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 00:30:47,159 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:47] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:30:47,200 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\routes\\nlp.py', reloading
+2026-04-18 00:30:49,973 [INFO]  * Restarting with stat
+2026-04-18 00:30:50,875 [INFO] Sage Backend Starting...
+2026-04-18 00:30:55,902 [WARNING]  * Debugger is active!
+2026-04-18 00:30:55,909 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 00:30:55,983 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:55] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:55,985 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:55] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:55,990 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:55] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:55,993 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:55] "OPTIONS /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:55,997 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:55] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:56,302 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:56] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:56,303 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:56] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:56,620 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:56] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 00:30:56,836 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:56] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:57,195 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:57] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:57,687 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:57] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 00:30:58,090 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:58] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:30:58,119 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:58] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:30:58,147 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:58] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:58,454 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:30:58,454 [INFO]   - Google Access Token present: True
+2026-04-18 00:30:58,454 [INFO]   - Fetching Calendar events...
+2026-04-18 00:30:58,523 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:58] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 00:30:58,965 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:58] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:59,410 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:59] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:30:59,520 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 00:30:59,583 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:30:59,586 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:30:59,921 [INFO] 127.0.0.1 - - [18/Apr/2026 00:30:59] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:31:00,638 [INFO] 127.0.0.1 - - [18/Apr/2026 00:31:00] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 00:31:02,138 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 00:31:02,138 [INFO]   - No emails found in fetch range.
+2026-04-18 00:31:02,138 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:31:04,857 [INFO] 127.0.0.1 - - [18/Apr/2026 00:31:04] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:31:05,228 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 00:31:05,228 [INFO]   - Google Access Token present: True
+2026-04-18 00:31:05,229 [INFO]   - Fetching Calendar events...
+2026-04-18 00:31:06,276 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 00:31:06,479 [INFO]   - Fetching Gmail messages...
+2026-04-18 00:31:06,481 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 00:31:07,749 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 00:31:07,750 [INFO]   - No emails found in fetch range.
+2026-04-18 00:31:07,750 [INFO]   - Generating briefing using Gemini...
+2026-04-18 00:31:09,659 [INFO] 127.0.0.1 - - [18/Apr/2026 00:31:09] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 00:31:11,742 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\services\\nlp_parser.py', reloading

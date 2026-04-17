@@ -27,6 +27,7 @@ export default function DashboardPage() {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
   const [briefingData, setBriefingData] = useState<any>(null);
   const [tasks, setTasks] = useState<any[]>([]);
   const [expenses, setExpenses] = useState<any[]>([]);
@@ -68,8 +69,18 @@ export default function DashboardPage() {
     fetchBriefing();
   }, []);
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (cooldown > 0) {
+      timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [cooldown]);
+
   const handleRefresh = () => {
+    if (cooldown > 0) return;
     setRefreshing(true);
+    setCooldown(60); // 60 seconds rate limit
     fetchBriefing();
   };
 
@@ -123,11 +134,11 @@ export default function DashboardPage() {
             variant="outline" 
             size="sm" 
             onClick={handleRefresh} 
-            disabled={loading || refreshing}
+            disabled={loading || refreshing || cooldown > 0}
             className="bg-card border-border gap-2"
           >
             <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-            Refresh
+            {cooldown > 0 ? `Wait ${cooldown}s` : 'Refresh'}
           </Button>
           <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border">
             <Calendar className="w-4 h-4 text-muted-foreground" />

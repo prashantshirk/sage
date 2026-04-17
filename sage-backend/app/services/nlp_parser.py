@@ -1,15 +1,18 @@
-from app.services import groq_service
+from app.services import groq_service, gemini_service
 from app.utils.date_helpers import parse_natural_date
 from app.models.expense import create_expense, get_expenses_by_user
 from app.models.task import create_task, get_todays_tasks
 from app.models.user import get_user_by_id
 from flask import current_app
 
-def process_natural_language_input(db, user_id, user_input):
-    extracted = groq_service.extract_structured_data(user_input)
+def process_natural_language_input(db, user_id, user_input, image_base64=None, mime_type="image/jpeg"):
+    if image_base64:
+        extracted = gemini_service.extract_data_from_image(image_base64, user_input, mime_type)
+    else:
+        extracted = groq_service.extract_structured_data(user_input)
     
     if not extracted or "action" not in extracted:
-        return {"success": False, "message": "Sorry, I couldn't understand that. Try being more specific."}
+        return {"success": False, "message": "Sorry, I couldn't understand that. Try being more specific or uploading a clearer image."}
         
     action = extracted.get("action")
     
@@ -28,28 +31,31 @@ def process_natural_language_input(db, user_id, user_input):
         
         expense_doc = create_expense(db, user_id, expense_data)
         
-        task_data = {
-            "title": f"Pay {expense_data.get('name')}",
-            "due_date": due_date,
-            "category": "bill",
-            "source": "nlp"
-        }
-        create_task(db, user_id, task_data)
-        
-        try:
-            from app.services.calendar_service import create_calendar_event
-            user = get_user_by_id(db, user_id)
-            if user and user.get("google_access_token"):
-                tokens = {
-                    "token": user.get("google_access_token"),
-                    "refresh_token": user.get("google_refresh_token"),
-                    "token_uri": "https://oauth2.googleapis.com/token",
-                    "client_id": current_app.config.get("GOOGLE_CLIENT_ID"),
-                    "client_secret": current_app.config.get("GOOGLE_CLIENT_SECRET"),
-                }
-                create_calendar_event(tokens, task_data["title"], due_date)
-        except Exception as e:
-            print(f"Calendar sync error (expense): {e}")
+        # Only add to Tasks and Calendar if the due date is in the future or today
+        from app.utils.date_helpers import is_overdue
+        if due_date and not is_overdue(due_date):
+            task_data = {
+                "title": f"Pay {expense_data.get('name')}",
+                "due_date": due_date,
+                "category": "bill",
+                "source": "nlp"
+            }
+            create_task(db, user_id, task_data)
+            
+            try:
+                from app.services.calendar_service import create_calendar_event
+                user = get_user_by_id(db, user_id)
+                if user and user.get("google_access_token"):
+                    tokens = {
+                        "token": user.get("google_access_token"),
+                        "refresh_token": user.get("google_refresh_token"),
+                        "token_uri": "https://oauth2.googleapis.com/token",
+                        "client_id": current_app.config.get("GOOGLE_CLIENT_ID"),
+                        "client_secret": current_app.config.get("GOOGLE_CLIENT_SECRET"),
+                    }
+                    create_calendar_event(tokens, task_data["title"], due_date)
+            except Exception as e:
+                print(f"Calendar sync error (expense): {e}")
             
         msg = groq_service.generate_response_message(action, extracted, True)
         return {"success": True, "action": "add_expense", "data": expense_doc, "message": msg}

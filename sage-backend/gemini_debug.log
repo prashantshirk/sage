@@ -215,3 +215,118 @@ Please retry in 10.524289455s. [links {
 
 --- 2026-04-17 23:23:08.893586 Error in Gemini ---
 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.
+
+--- [2026-04-18 00:13:15.557707] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are feeling refreshed and ready to take on the day. As you get settled, please note that you have a few high-priority items that require your attention, specifically regarding your Groq API key which needs renewal within the next week, and a couple of reminders from Aakash Prajapati about outstanding fees totaling 600 INR.
+
+Looking ahead to tomorrow, you have a busy schedule with your OLA and Netflix subscriptions due, alongside two exciting events: the GitHub Copilot Dev Days in the morning and the Global Azure 2026 session in the afternoon. Since your OLA subscription ends tomorrow, it would be wise to address that payment today to keep everything running smoothly. Remember that every small task you complete is a step forward in building the momentum you need to achieve your bigger goals.
+
+--- [2026-04-18 00:13:50.962123] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are feeling refreshed and ready to take on the day. Your to-do list is clear, and I have already noted that you’ve successfully completed your morning routine. Today is a great day to get ahead of a few administrative items, specifically the urgent requests from Aakash Prajapati regarding the 600 INR in outstanding fees and the alert from Groq about your API key expiration.
+
+Looking ahead to tomorrow, you have a busy schedule with the GitHub Copilot Dev Days and the Global Azure event in Mumbai. Please keep in mind that your OLA subscription payment of 70 INR is due tomorrow, alongside your Netflix subscription, so it would be wise to clear those payments today to ensure a smooth start to your weekend. You have some exciting professional development opportunities on the horizon, so staying on top of these small logistics will help you focus fully on the sessions tomorrow. Remember that every small task you complete today is a building block for a more productive and stress-free tomorrow.
+
+--- [2026-04-18 00:14:01.335708] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope your day is off to a bright and productive start. As you settle in, please note that you have a few high-priority items requiring your attention today. You need to renew your Groq API key before it expires in a week, and I also recommend clearing that outstanding fee of 600 INR to Aakash Prajapati to keep your accounts in good standing.
+
+Looking ahead to tomorrow, you have a busy schedule with the GitHub Copilot Dev Days in the morning and the Global Azure 2026 event in the afternoon. Please also remember that your OLA subscription payment is due tomorrow, which coincides with your Netflix subscription renewal. Clearing these financial tasks today will help you head into your events tomorrow with a completely clear mind.
+
+Stay focused and keep pushing toward your goals, as your commitment to staying organized truly sets the stage for your success. You are making great progress, so take a deep breath and tackle these tasks one by one with confidence.
+
+--- [2026-04-18 00:21:36.699621] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are feeling refreshed and ready to take on the day. You have already knocked your morning routine off the list, which is a great start. Please keep in mind that you have a few urgent administrative items to handle, specifically the pending payment of 600 INR to Aakash Prajapati and the renewal of your Groq API key, which is set to expire in one week.
+
+Looking ahead to tomorrow, April 18th, you have a very busy day with your OLA and Netflix subscriptions coming due. You are also scheduled to attend the GitHub Copilot Dev Days in the morning and the Global Azure 2026 event in the afternoon, so it would be wise to clear those payments today to ensure your focus remains entirely on those exciting tech sessions. 
+
+Success is not just about the big milestones, but the consistent, small actions you take every single day to stay organized and prepared. You have an action-packed schedule ahead, so take a deep breath and tackle these tasks one by one. You have everything you need to make today and tomorrow incredibly productive.
+
+--- [2026-04-18 00:21:47.484518] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are feeling refreshed and ready to take on the day. Since you have already checked off your morning routine, you are off to a great start. Today is a relatively quiet day for tasks, which gives you a perfect opportunity to prepare for a very busy schedule tomorrow.
+
+Please keep in mind that you have two important subscription payments due tomorrow, April 18th, for both your OLA and Netflix accounts. You also have an exciting day ahead of you tomorrow with the GitHub Copilot Dev Days in the morning and the Global Azure 2026 event in the afternoon, so it would be wise to get those payments squared away today to ensure your focus remains entirely on learning and networking.
+
+Success is often just a series of small, consistent actions taken every single day. Take a moment to breathe, enjoy your morning, and tackle your priorities with confidence. I am here if you need anything else to make your day run more smoothly.
+
+--- [2026-04-18 00:26:49.143196] Document Extraction ---
+Response: {
+  "action": "add_expense",
+  "name": "MSEDCL Electricity Bill",
+  "amount": 1730.00,
+  "due_date": "2019-12-30",
+  "category": "bill",
+  "notes": "Consumer No: 000093887042. Payment due by 2019-12-30 for Rs 1730.00, or Rs 1750.00 after due date."
+}
+
+--- [2026-04-18 00:31:02.139154] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope you are feeling refreshed and ready to take on this beautiful Friday, April 17, 2026. Your schedule is looking nice and clear today, as you have already successfully checked off your morning reminder to brush your teeth. With no meetings or appointments on your calendar, you have a wonderful opportunity to focus on your personal priorities or dive into deep work without any interruptions.
+
+Before you settle into your rhythm, please note that your OLA subscription is due for renewal tomorrow. It is a small recurring expense of 70.00 INR, so you may want to ensure your payment details are ready to go before the end of the day. Beyond that, your inbox is currently clear, which gives you a great clean slate to start your morning.
+
+Remember that productivity is not about doing more, but about doing what matters most with intention and clarity. Take a moment to breathe, set your own pace for the day, and trust that you have everything you need to make this a successful one. I am here whenever you need me, so have a fantastic day ahead!
+
+--- [2026-04-18 00:31:07.750684] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope you are feeling refreshed and ready to take on this beautiful Friday, April 17, 2026. You have already checked off your first task of the day, so you are off to a productive start.
+
+Looking at your schedule, your calendar is completely clear today, which gives you some excellent breathing room to focus on your personal priorities or catch up on any lingering projects. However, please keep in mind that your OLA subscription payment of 70.00 INR is due tomorrow. Since this is a recurring monthly expense, you may want to set aside a moment today to ensure that is squared away so you can head into the weekend without any pending financial tasks.
+
+Remember that productivity is not just about doing more, but about doing what matters most with intention and clarity. You have a clean slate ahead of you today, so make sure to carve out some time for yourself amidst your responsibilities. Have a wonderful and successful day ahead!
+
+--- [2026-04-18 00:32:10.295612] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are having a wonderful start to your day on this Friday, April 17, 2026. You have already knocked your first task off the list by brushing your teeth, so you are officially off to a productive start.
+
+Looking ahead at your financial commitments, please keep in mind that your OLA subscription of 70 INR is due tomorrow. Since this is a recurring monthly expense, you may want to ensure your payment method is ready so you do not experience any interruption in your service. Otherwise, your calendar is completely clear today, which gives you a great opportunity to focus on your own priorities or simply enjoy a bit of breathing room.
+
+Remember that productivity is not just about doing more, but about doing what matters most with intention. Take a moment to appreciate the quiet start to your day and carry that sense of calm into whatever you choose to tackle next.
+
+--- [2026-04-18 00:32:16.646041] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope you are feeling refreshed and ready to take on this beautiful Friday, April 17, 2026. You have already checked off your first task of the day, so you are off to a productive start.
+
+Looking ahead at your financial commitments, please note that your OLA subscription is due tomorrow, April 18. It is a small amount of 70 INR, but it is worth keeping on your radar so your service remains uninterrupted. Your calendar is clear for the day, which provides you with a wonderful opportunity to focus on your personal priorities or catch up on any deep work you have been meaning to tackle.
+
+Remember that productivity is not about doing more things, but about doing the right things with intention. Take a moment to breathe and set your own pace today, as you have the power to define what a successful day looks like for you.
+
+--- [2026-04-18 00:35:02.857623] Document Extraction ---
+Response: {
+  "action": "add_expense",
+  "name": "MSEDCL Electricity Bill",
+  "amount": 1730.00,
+  "due_date": "2019-12-30",
+  "category": "bill",
+  "notes": "Bill for December 2019. Consumer number: 000093887042. Payment of Rs. 1720.00 if paid by 2019-12-19."
+}
+
+--- [2026-04-18 00:35:40.851373] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope you are feeling refreshed and ready to take on the day. Looking at your schedule, it seems you have already knocked out your first task of the morning, so you are off to a productive start.
+
+Please keep in mind that your OLA subscription payment of 70 INR is due tomorrow. It might be a good idea to settle that today so you can cross it off your list and avoid any last-minute stress. Aside from that, your calendar is clear, giving you a wonderful opportunity to focus on your personal priorities or any deep work you have planned.
+
+Remember that progress is often found in the small, consistent steps we take each day rather than in singular grand gestures. Enjoy the quiet rhythm of your morning and make the most of the time you have available to you.
+
+--- [2026-04-18 00:35:47.722530] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, Prashant Shirke! I hope you are feeling refreshed and ready to take on the day. Looking at your schedule, it seems you have already started off on the right foot by checking off your morning routine tasks, leaving your calendar clear and open for whatever you choose to prioritize today.
+
+I do want to bring one quick administrative item to your attention before you dive into your work. Your OLA subscription is due for renewal tomorrow, April 18, with a payment of 70 INR. Please keep that in mind so you can avoid any interruption to your service.
+
+With a clean slate ahead of you, remember that the most productive days are often the ones where we focus on the work that truly aligns with our long-term goals. Take a moment to set a clear intention for what you want to achieve before the sun sets. You have everything you need to make today a success.
+
+--- [2026-04-18 00:40:01.958648] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you are feeling refreshed and ready to take on this beautiful April day. It looks like you have already started off on the right foot by checking off your morning routine, and now we can focus on keeping your week running smoothly.
+
+There are a few pressing items that need your attention today to keep everything on track. You have a high-priority notice regarding your Groq API key, which is set to expire in seven days, so please prioritize that renewal when you have a moment. Additionally, I see a request from Aakash Prajapati regarding outstanding fees of 600 INR that require your attention. Please also keep in mind that your OLA subscription is due tomorrow, alongside your Netflix payment, so it might be a good idea to settle those today to avoid any service interruptions.
+
+Looking ahead, you have an exciting day tomorrow with both the GitHub Copilot Dev Days and the Global Azure event in Mumbai. You are building momentum toward a very productive weekend, and handling these small administrative tasks today will clear your path for those events. Believe in your ability to manage the details, as your consistency is what makes your larger goals possible.
+
+--- [2026-04-18 00:40:12.149956] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Daily Briefing Generation ---
+Response: Morning, prashant shirke! I hope you had a restful night and are feeling ready to take on the day. As we look at your schedule, I want to highlight a few high-priority items that need your attention. You have a few urgent administrative tasks, specifically regarding your Groq API key which expires in a week, and an outstanding payment of 600 INR to Aakash Prajapati that requires your prompt action.
+
+Looking ahead to tomorrow, April 18th, you have a busy day featuring the GitHub Copilot Dev Days in the morning and the Global Azure event in the afternoon. Please also remember that your OLA subscription payment is due tomorrow, so it would be wise to get that settled today to avoid any service interruptions. You are already off to a great start today, and managing these small details now will clear the path for a much more productive and focused tomorrow. Keep pushing forward, because your consistency is exactly what leads to long-term success.
+
+--- [2026-04-18 00:41:07.799665] Document Extraction ---
+Response: {
+  "action": "add_expense",
+  "name": "MSEDCL Electricity Bill",
+  "amount": 1730.00,
+  "due_date": "2019-12-30",
+  "category": "bill",
+  "notes": "Bill for the month of December 2019. Consumer number: 000093887042."
+}

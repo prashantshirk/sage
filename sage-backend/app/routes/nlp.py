@@ -11,14 +11,16 @@ nlp_bp = Blueprint("nlp", __name__)
 def process():
     payload = request.get_json(silent=True) or {}
     text = (payload.get("input") or "").strip()
+    image_base64 = payload.get("image_base64")
+    mime_type = payload.get("mime_type", "image/jpeg")
     
-    if not text:
+    if not text and not image_base64:
         return jsonify({"success": False, "message": "Input cannot be empty."}), 400
         
     db = get_db()
     user_id = get_current_user_id()
     
-    result = process_natural_language_input(db, user_id, text)
+    result = process_natural_language_input(db, user_id, text, image_base64, mime_type)
     
     status_code = 200 if result.get("success") else 400
     return jsonify(result), status_code

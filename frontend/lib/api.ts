@@ -50,8 +50,8 @@ export async function logout() {
 }
 
 // 3. NLP functions
-export async function processNaturalLanguage(input: string) {
-  return apiCall("POST", "/api/nlp/process", { input });
+export async function processNaturalLanguage(input: string, imageBase64?: string, mimeType?: string) {
+  return apiCall("POST", "/api/nlp/process", { input, image_base64: imageBase64, mime_type: mimeType });
 }
 
 export async function getSuggestions() {

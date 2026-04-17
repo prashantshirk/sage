@@ -3,7 +3,7 @@ from datetime import datetime
 from ..models.user import get_user_by_id
 from ..models.task import get_todays_tasks
 from ..models.expense import get_upcoming_expenses
-from ..services import gmail_service, calendar_service, groq_service
+from ..services import gmail_service, calendar_service, groq_service, gemini_service
 from ..services.google_auth import refresh_google_token_if_needed
 
 briefing_bp = Blueprint('briefing', __name__)
@@ -57,9 +57,9 @@ def daily_briefing():
         else:
             current_app.logger.info("  - No emails found in fetch range.")
 
-    # Use Groq for briefing generation (bypassing Gemini quota limits)
-    current_app.logger.info("  - Generating briefing using Groq...")
-    briefing_text = groq_service.generate_daily_briefing(
+    # Use Gemini for briefing generation to relieve pressure on Groq
+    current_app.logger.info("  - Generating briefing using Gemini...")
+    briefing_text = gemini_service.generate_daily_briefing(
         user_name=user_name,
         tasks_today=tasks,
         upcoming_expenses=expenses,
