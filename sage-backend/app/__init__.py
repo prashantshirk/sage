@@ -79,6 +79,7 @@ def register_blueprints(app: Flask) -> None:
     from .routes.nlp import nlp_bp
     from .routes.streak import streak_bp
     from .routes.search import search_bp
+    from .routes.telegram import telegram_bp
 
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(tasks_bp, url_prefix="/api/tasks")
@@ -87,3 +88,4 @@ def register_blueprints(app: Flask) -> None:
     app.register_blueprint(nlp_bp, url_prefix="/api/nlp")
     app.register_blueprint(streak_bp, url_prefix="/api/streak")
     app.register_blueprint(search_bp, url_prefix="/api/search")
+    app.register_blueprint(telegram_bp)

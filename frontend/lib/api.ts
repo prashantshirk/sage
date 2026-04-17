@@ -49,6 +49,10 @@ export async function logout() {
   return res;
 }
 
+export const unlinkTelegram = async (): Promise<void> => {
+  await apiCall("PATCH", "/auth/me", { unlink_telegram: true });
+};
+
 // 3. NLP functions
 export async function processNaturalLanguage(input: string, imageBase64?: string, mimeType?: string) {
   return apiCall("POST", "/api/nlp/process", { input, image_base64: imageBase64, mime_type: mimeType });

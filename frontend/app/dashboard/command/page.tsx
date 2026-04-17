@@ -19,6 +19,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { processNaturalLanguage, getSuggestions, getTodaysTasks, getExpenses } from "@/lib/api";
+import { toast } from "sonner";
 
 export default function AskSagePage() {
   const [inputText, setInputText] = useState("");
@@ -32,6 +33,70 @@ export default function AskSagePage() {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [imageMimeType, setImageMimeType] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceSupported, setVoiceSupported] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && 
+       ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+      setVoiceSupported(true);
+    }
+  }, []);
+
+  const startVoiceInput = () => {
+    if (isListening) {
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || 
+      (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      toast.error("Voice input not supported in this browser. Use Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.onerror = (event: any) => {
+      setIsListening(false);
+      console.error("Speech recognition error:", event.error, event);
+      if (event.error === "not-allowed") {
+        toast.error("Microphone permission denied. Please allow mic access in your browser.");
+      } else if (event.error === "no-speech") {
+        toast.error("No speech detected. Try again.");
+      } else {
+        toast.error(`Voice input failed (${event.error}). Try again.`);
+      }
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setInputText(transcript);
+      setIsListening(false);
+      
+      setTimeout(() => {
+        handleSubmit(transcript);
+      }, 500);
+    };
+
+    recognition.start();
+  };
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -89,13 +154,18 @@ export default function AskSagePage() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleSubmit = async () => {
-    if (!inputText.trim() && !imageBase64) return;
+  const handleSubmit = async (overrideText?: string) => {
+    const textToSend = typeof overrideText === "string" ? overrideText : inputText;
+    
+    if (!textToSend.trim() && !imageBase64) {
+      toast.error("Please enter something first.");
+      return;
+    }
     
     setIsLoading(true);
     setResult(null);
     try {
-      const res = await processNaturalLanguage(inputText, imageBase64 || undefined, imageMimeType || undefined);
+      const res = await processNaturalLanguage(textToSend.trim(), imageBase64 || undefined, imageMimeType || undefined);
       setResult(res);
       setInputText("");
       setSelectedFile(null);
@@ -140,6 +210,12 @@ export default function AskSagePage() {
       >
         <Card className="border-border shadow-lg bg-card/50 backdrop-blur">
           <CardContent className="p-6 space-y-4">
+            {isListening && (
+              <div className="flex items-center gap-2 text-red-400 text-sm font-medium animate-pulse">
+                <span className="h-2 w-2 rounded-full bg-red-400 inline-block" />
+                Listening... speak now
+              </div>
+            )}
             <Textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value.slice(0, 500))}
@@ -185,15 +261,51 @@ export default function AskSagePage() {
                   </div>
                 )}
               </div>
-              <Button 
-                onClick={handleSubmit} 
-                disabled={(!inputText.trim() && !imageBase64) || isLoading}
-                size="lg"
-                className="gap-2 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white shadow-md transition-all hover:scale-105"
-              >
-                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
-                Send to Sage
-              </Button>
+              <div className="flex items-center gap-2">
+                {voiceSupported && (
+                  <button
+                    type="button"
+                    onClick={startVoiceInput}
+                    disabled={isLoading}
+                    className={`
+                      relative flex items-center justify-center
+                      h-10 w-10 rounded-full border transition-all duration-200
+                      ${isListening 
+                        ? "bg-red-500 border-red-500 text-white animate-pulse shadow-lg shadow-red-500/40" 
+                        : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground/40"
+                      }
+                    `}
+                    title={isListening ? "Tap to stop" : "Tap to speak"}
+                  >
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      width="18" height="18" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                      <line x1="12" y1="19" x2="12" y2="22"/>
+                    </svg>
+                    {isListening && (
+                      <span className="absolute inset-0 rounded-full bg-red-500 opacity-30 animate-ping" />
+                    )}
+                  </button>
+                )}
+                <Button 
+                  onClick={() => handleSubmit()} 
+                  disabled={(!inputText.trim() && !imageBase64) || isLoading}
+                  size="lg"
+                  className="gap-2 bg-gradient-to-r from-amber-500 to-indigo-600 hover:from-amber-600 hover:to-indigo-700 text-white shadow-md transition-all hover:scale-105"
+                >
+                  {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+                  Send to Sage
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>

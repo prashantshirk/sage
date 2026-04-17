@@ -84,14 +84,16 @@ def set_webhook(webhook_url: str) -> dict:
     Returns:
         Telegram API response dict.
     """
+    secret = current_app.config.get("TELEGRAM_WEBHOOK_SECRET", "")
     payload = {
         "url": webhook_url,
         "allowed_updates": ["message", "callback_query"],
         "drop_pending_updates": True,
+        "secret_token": secret
     }
     resp = requests.post(_api_url("setWebhook"), json=payload, timeout=10)
     result = resp.json()
-    print(f"[TelegramService] set_webhook → {result}")
+    print(f"[TelegramService] set_webhook -> {result}")
     return result
 
 

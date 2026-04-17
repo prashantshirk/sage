@@ -1771,3 +1771,190 @@
 2026-04-18 03:41:01,445 [INFO]  * Debugger PIN: 814-934-938
 2026-04-18 03:41:07,137 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\routes\\auth.py', reloading
 2026-04-18 03:41:07,906 [INFO]  * Restarting with stat
+2026-04-18 03:41:08,964 [INFO] Sage Backend Starting...
+2026-04-18 03:41:12,282 [WARNING]  * Debugger is active!
+2026-04-18 03:41:12,290 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 03:48:11,126 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\__init__.py', reloading
+2026-04-18 03:48:11,818 [INFO]  * Restarting with stat
+2026-04-18 03:48:12,919 [INFO] Sage Backend Starting...
+2026-04-18 03:48:18,303 [WARNING]  * Debugger is active!
+2026-04-18 03:48:18,313 [INFO]  * Debugger PIN: 814-934-938
+2026-04-18 03:53:33,703 [INFO] 127.0.0.1 - - [18/Apr/2026 03:53:33] "[35m[1mPOST /telegram/set-webhook HTTP/1.1[0m" 500 -
+2026-04-18 03:53:46,850 [INFO]  * Detected change in 'C:\\Users\\prashant shirke\\Desktop\\sage\\sage-backend\\app\\services\\telegram_service.py', reloading
+2026-04-18 03:53:47,693 [INFO]  * Restarting with stat
+2026-04-18 03:54:36,758 [INFO] Sage Backend Starting...
+2026-04-18 03:54:42,425 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-04-18 03:54:42,451 [INFO] Added job "send_morning_briefings" to job store "default"
+2026-04-18 03:54:42,451 [INFO] Scheduler started
+2026-04-18 03:54:42,502 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.28.216:5000
+2026-04-18 03:54:42,503 [INFO] [33mPress CTRL+C to quit[0m
+2026-04-18 03:54:46,173 [INFO] 127.0.0.1 - - [18/Apr/2026 03:54:46] "[35m[1mPOST /telegram/set-webhook HTTP/1.1[0m" 500 -
+2026-04-18 03:55:43,570 [INFO] Sage Backend Starting...
+2026-04-18 03:55:47,489 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-04-18 03:55:47,494 [INFO] Added job "send_morning_briefings" to job store "default"
+2026-04-18 03:55:47,494 [INFO] Scheduler started
+2026-04-18 03:55:47,534 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.28.216:5000
+2026-04-18 03:55:47,535 [INFO] [33mPress CTRL+C to quit[0m
+2026-04-18 03:56:01,727 [INFO] 127.0.0.1 - - [18/Apr/2026 03:56:01] "POST /telegram/set-webhook HTTP/1.1" 200 -
+2026-04-18 03:58:19,002 [INFO] Sage Backend Starting...
+2026-04-18 03:58:26,777 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-04-18 03:58:26,781 [INFO] Added job "send_morning_briefings" to job store "default"
+2026-04-18 03:58:26,782 [INFO] Scheduler started
+2026-04-18 03:58:26,820 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.28.216:5000
+2026-04-18 03:58:26,821 [INFO] [33mPress CTRL+C to quit[0m
+2026-04-18 03:58:40,991 [INFO] 127.0.0.1 - - [18/Apr/2026 03:58:40] "POST /telegram/set-webhook HTTP/1.1" 200 -
+2026-04-18 04:00:13,920 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:13] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:13,921 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:13] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:14,395 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:14,418 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:14,771 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:00:14,772 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:00:14,773 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:00:14,775 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:00:14,777 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:00:14,781 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:14] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:00:15,129 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:00:15,129 [INFO]   - Google Access Token present: True
+2026-04-18 04:00:15,129 [INFO]   - Fetching Calendar events...
+2026-04-18 04:00:15,275 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:15] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:00:15,365 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:15] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:00:15,629 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:15] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:00:15,757 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:15] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:00:16,545 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:00:16,585 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:00:16,590 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:00:17,586 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:17] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:17,908 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:17] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:00:18,592 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:00:18,593 [INFO]   - No emails found in fetch range.
+2026-04-18 04:00:18,593 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:00:20,421 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:20] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:00:20,763 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:00:20,763 [INFO]   - Google Access Token present: True
+2026-04-18 04:00:20,763 [INFO]   - Fetching Calendar events...
+2026-04-18 04:00:21,812 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:00:21,841 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:00:21,845 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:00:22,958 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:00:22,958 [INFO]   - No emails found in fetch range.
+2026-04-18 04:00:22,958 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:00:24,653 [INFO] 127.0.0.1 - - [18/Apr/2026 04:00:24] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:01:56,459 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:01:56,459 [INFO] 127.0.0.1 - - [18/Apr/2026 04:01:56] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:01:56,902 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:01:56,902 [INFO] 127.0.0.1 - - [18/Apr/2026 04:01:56] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:01:59,268 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:01:59,268 [INFO] 127.0.0.1 - - [18/Apr/2026 04:01:59] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:02:03,644 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:02:03,645 [INFO] 127.0.0.1 - - [18/Apr/2026 04:02:03] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:02:12,016 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:02:12,016 [INFO] 127.0.0.1 - - [18/Apr/2026 04:02:12] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:02:28,411 [WARNING] [Telegram] Webhook rejected — secret token mismatch
+2026-04-18 04:02:28,411 [INFO] 127.0.0.1 - - [18/Apr/2026 04:02:28] "[31m[1mPOST /telegram/webhook HTTP/1.1[0m" 403 -
+2026-04-18 04:02:36,194 [INFO] Sage Backend Starting...
+2026-04-18 04:02:39,423 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-04-18 04:02:39,428 [INFO] Added job "send_morning_briefings" to job store "default"
+2026-04-18 04:02:39,428 [INFO] Scheduler started
+2026-04-18 04:02:39,468 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.28.216:5000
+2026-04-18 04:02:39,468 [INFO] [33mPress CTRL+C to quit[0m
+2026-04-18 04:02:44,432 [INFO] 127.0.0.1 - - [18/Apr/2026 04:02:44] "POST /telegram/set-webhook HTTP/1.1" 200 -
+2026-04-18 04:05:52,431 [INFO] 127.0.0.1 - - [18/Apr/2026 04:05:52] "POST /telegram/set-webhook HTTP/1.1" 200 -
+2026-04-18 04:06:50,929 [INFO] 127.0.0.1 - - [18/Apr/2026 04:06:50] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 04:06:51,891 [INFO] 127.0.0.1 - - [18/Apr/2026 04:06:51] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:06:51,970 [INFO] 127.0.0.1 - - [18/Apr/2026 04:06:51] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:06:52,532 [INFO] 127.0.0.1 - - [18/Apr/2026 04:06:52] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:10:55,441 [INFO] Sage Backend Starting...
+2026-04-18 04:11:54,790 [INFO] Sage Backend Starting...
+2026-04-18 04:14:11,919 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:11] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 04:14:12,198 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:12] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:14:12,267 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:12] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:14:12,624 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:12] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:14:44,366 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:14:44,368 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:14:44,369 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:14:44,370 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:14:44,371 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:14:44,374 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:14:44,712 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:14:44,712 [INFO]   - Google Access Token present: True
+2026-04-18 04:14:44,712 [INFO]   - Fetching Calendar events...
+2026-04-18 04:14:44,923 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:44] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:14:45,355 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:45] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:14:45,390 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:45] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:14:45,738 [INFO] 127.0.0.1 - - [18/Apr/2026 04:14:45] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:14:46,190 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:14:46,235 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:14:46,241 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:14:47,326 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:14:47,326 [INFO]   - No emails found in fetch range.
+2026-04-18 04:14:47,327 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:15:04,759 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:15:04,759 [INFO]   - Google Access Token present: True
+2026-04-18 04:15:04,760 [INFO]   - Fetching Calendar events...
+2026-04-18 04:15:06,045 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:15:06,083 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:15:06,086 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:15:07,093 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:15:07,094 [INFO]   - No emails found in fetch range.
+2026-04-18 04:15:07,094 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:15:07,727 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:07] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:15:16,268 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:16] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:15:32,151 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:32] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:15:32,152 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:32] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:15:32,154 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:32] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:15:32,442 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:15:32,442 [INFO]   - Google Access Token present: True
+2026-04-18 04:15:32,442 [INFO]   - Fetching Calendar events...
+2026-04-18 04:15:32,553 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:32] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:15:32,629 [INFO] 127.0.0.1 - - [18/Apr/2026 04:15:32] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:15:33,597 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:15:33,625 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:15:33,628 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:15:34,611 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:15:34,612 [INFO]   - No emails found in fetch range.
+2026-04-18 04:15:34,612 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:16:08,470 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:08] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:16:14,071 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /auth/me HTTP/1.1" 200 -
+2026-04-18 04:16:14,401 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "GET /auth/me HTTP/1.1" 200 -
+2026-04-18 04:16:14,643 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:16:14,801 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:16:14,802 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:16:14,803 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:16:14,804 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:16:14,805 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:14] "OPTIONS /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:16:14,983 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:16:14,984 [INFO]   - Google Access Token present: True
+2026-04-18 04:16:14,984 [INFO]   - Fetching Calendar events...
+2026-04-18 04:16:15,182 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:15] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:16:15,212 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:15] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:16:15,538 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:15] "GET /api/tasks/today HTTP/1.1" 200 -
+2026-04-18 04:16:15,617 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:15] "GET /api/finance/ HTTP/1.1" 200 -
+2026-04-18 04:16:16,138 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:16:16,437 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:16:16,440 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:16:18,128 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:16:18,128 [INFO]   - No emails found in fetch range.
+2026-04-18 04:16:18,128 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:16:20,251 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:20] "GET /api/briefing/daily HTTP/1.1" 200 -
+2026-04-18 04:16:20,612 [INFO] --- Briefing requested for user 69e25291adc179601357d8a0 ---
+2026-04-18 04:16:20,612 [INFO]   - Google Access Token present: True
+2026-04-18 04:16:20,612 [INFO]   - Fetching Calendar events...
+2026-04-18 04:16:21,648 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:16:21,672 [INFO]   - Fetching Gmail messages...
+2026-04-18 04:16:21,677 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 04:16:22,798 [INFO] Refreshing credentials due to a 401 response. Attempt 1/2.
+2026-04-18 04:16:22,799 [INFO]   - No emails found in fetch range.
+2026-04-18 04:16:22,799 [INFO]   - Generating briefing using Gemini...
+2026-04-18 04:16:53,375 [INFO] 127.0.0.1 - - [18/Apr/2026 04:16:53] "GET /api/briefing/daily HTTP/1.1" 200 -

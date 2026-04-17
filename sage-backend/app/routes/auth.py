@@ -83,13 +83,18 @@ def google_callback():
         }
         user = create_user(db, user_data)
 
+    # Calculate expiry
+    expires_in = token_data.get("expires_in", 3600)
+    from datetime import datetime, timezone, timedelta
+    expiry_dt = datetime.now(timezone.utc) + timedelta(seconds=expires_in)
+
     # Store tokens
     update_google_tokens(
         db,
         user["_id"],
         access_token,
         refresh_token,
-        None  # expiry not always returned; can be derived from expires_in
+        expiry_dt.isoformat()
     )
 
     # Generate JWT and redirect to frontend

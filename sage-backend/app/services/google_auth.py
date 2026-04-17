@@ -15,8 +15,8 @@ def refresh_google_token_if_needed(db, user_id, user):
     if not access_token:
         return None
 
-    # Check if token is expired (or expiring in the next 5 minutes)
-    token_expired = False
+    # Default to expired if we don't know the expiry
+    token_expired = True
     if expiry:
         try:
             if isinstance(expiry, str):
@@ -27,8 +27,8 @@ def refresh_google_token_if_needed(db, user_id, user):
                 expiry_dt = expiry_dt.replace(tzinfo=timezone.utc)
             now = datetime.now(timezone.utc)
             from datetime import timedelta
-            if expiry_dt - now < timedelta(minutes=5):
-                token_expired = True
+            if expiry_dt - now > timedelta(minutes=5):
+                token_expired = False
         except Exception:
             pass
 

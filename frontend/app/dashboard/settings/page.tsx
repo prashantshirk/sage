@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
-import { getCurrentUser, updateCurrentUser, logout } from "@/lib/api";
+import { getCurrentUser, updateCurrentUser, logout, unlinkTelegram } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 
@@ -58,6 +58,9 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [telegramLinked, setTelegramLinked] = useState(false);
+  const [unlinkLoading, setUnlinkLoading] = useState(false);
+  const [userId, setUserId] = useState<string>("");
   const { theme, setTheme } = useTheme();
 
   const [selectedAccent, setSelectedAccent] = useState("amber");
@@ -80,6 +83,8 @@ export default function SettingsPage() {
       try {
         const data = await getCurrentUser();
         setUser(data);
+        setUserId(data?._id || data?.id || "");
+        setTelegramLinked(!!data?.telegram_chat_id);
         if (data.notifications) {
           setNotifications(prev => ({ ...prev, ...data.notifications }));
         }
@@ -145,6 +150,23 @@ export default function SettingsPage() {
     } catch (e) {
       toast.error("Logout failed");
     }
+  };
+
+  const handleUnlinkTelegram = async () => {
+    setUnlinkLoading(true);
+    try {
+      await unlinkTelegram();
+      setTelegramLinked(false);
+      toast.success("Telegram disconnected successfully");
+    } catch {
+      toast.error("Failed to disconnect Telegram");
+    }
+    setUnlinkLoading(false);
+  };
+
+  const getTelegramLink = () => {
+    if (!userId) return "#";
+    return `https://t.me/SageAssistantmeBot?start=${userId}`;
   };
 
   if (loading) {
@@ -263,6 +285,44 @@ export default function SettingsPage() {
                     </div>
                     <Button variant="outline" size="sm" className="border-border text-emerald-500" disabled>Connected</Button>
                   </div>
+
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50 border border-border/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-[#229ED9] flex items-center justify-center shadow-sm">
+                        <span className="text-white text-lg">✈</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-foreground">Telegram</p>
+                        <p className="text-xs text-muted-foreground">
+                          {telegramLinked 
+                            ? "✅ Connected — receive briefings & send commands" 
+                            : "Get daily briefings and control Sage from Telegram"}
+                        </p>
+                      </div>
+                    </div>
+                    {telegramLinked ? (
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive"
+                        onClick={handleUnlinkTelegram}
+                        disabled={unlinkLoading}
+                      >
+                        {unlinkLoading ? "Unlinking..." : "Disconnect"}
+                      </Button>
+                    ) : (
+                      <Button asChild size="sm" className="bg-[#229ED9] hover:bg-[#1a8bc4] text-white">
+                        <a href={getTelegramLink()} target="_blank" rel="noopener noreferrer">
+                          Connect Telegram →
+                        </a>
+                      </Button>
+                    )}
+                  </div>
+                  {!telegramLinked && (
+                    <p className="text-xs text-muted-foreground px-1">
+                      Click Connect, then tap Start in Telegram to link your account.
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             </>
