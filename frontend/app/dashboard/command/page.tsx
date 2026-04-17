@@ -33,6 +33,7 @@ export default function AskSagePage() {
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [imageMimeType, setImageMimeType] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
   const [isListening, setIsListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(false);
 
@@ -45,6 +46,9 @@ export default function AskSagePage() {
 
   const startVoiceInput = () => {
     if (isListening) {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
       setIsListening(false);
       return;
     }
@@ -59,9 +63,11 @@ export default function AskSagePage() {
     }
 
     const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
     
-    recognition.lang = "en-IN";
-    recognition.continuous = false;
+    // Use default browser language instead of hardcoding en-IN which can cause network errors
+    recognition.lang = window.navigator.language || "en-US";
+    recognition.continuous = true;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
@@ -79,20 +85,21 @@ export default function AskSagePage() {
       if (event.error === "not-allowed") {
         toast.error("Microphone permission denied. Please allow mic access in your browser.");
       } else if (event.error === "no-speech") {
-        toast.error("No speech detected. Try again.");
+        // Continuous mode might throw no-speech if quiet for too long
+        // toast.error("No speech detected. Try again.");
+      } else if (event.error === "network") {
+        toast.error("Network error: If using Brave, Speech API is blocked. Also ensure you are using localhost or HTTPS.");
       } else {
         toast.error(`Voice input failed (${event.error}). Try again.`);
       }
     };
 
     recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      setInputText(transcript);
-      setIsListening(false);
-      
-      setTimeout(() => {
-        handleSubmit(transcript);
-      }, 500);
+      let newTranscript = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        newTranscript += event.results[i][0].transcript;
+      }
+      setInputText(prev => prev + (prev ? " " : "") + newTranscript.trim());
     };
 
     recognition.start();
