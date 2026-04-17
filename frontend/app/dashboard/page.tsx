@@ -20,7 +20,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { getDailyBriefing } from "@/lib/api";
+import { getDailyBriefing, getTodaysTasks, getExpenses } from "@/lib/api";
 import { UserContext } from "./layout";
 
 export default function DashboardPage() {
@@ -28,14 +28,34 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [briefingData, setBriefingData] = useState<any>(null);
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [expenses, setExpenses] = useState<any[]>([]);
   
   // Local state for handled emails
   const [handledEmails, setHandledEmails] = useState<Set<number>>(new Set());
 
   const fetchBriefing = async () => {
     try {
-      const data = await getDailyBriefing();
-      setBriefingData(data);
+      const [briefing, todayTasks, financeData] = await Promise.allSettled([
+        getDailyBriefing(),
+        getTodaysTasks(),
+        getExpenses(),
+      ]);
+
+      if (briefing.status === "fulfilled") setBriefingData(briefing.value);
+      if (todayTasks.status === "fulfilled") setTasks(todayTasks.value || []);
+      if (financeData.status === "fulfilled") {
+        // Only show expenses due in the next 7 days
+        const allExpenses = financeData.value?.expenses || [];
+        const soon = allExpenses.filter((e: any) => {
+          if (!e.due_date || e.status === "paid") return false;
+          try {
+            const diff = (new Date(e.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24);
+            return diff >= -1 && diff <= 7;
+          } catch { return false; }
+        });
+        setExpenses(soon);
+      }
     } catch (e) {
       console.error("Failed to fetch daily briefing", e);
     } finally {
@@ -64,19 +84,20 @@ export default function DashboardPage() {
   const currentHour = new Date().getHours();
   const greeting = currentHour < 12 ? "Good morning" : currentHour < 18 ? "Good afternoon" : "Good evening";
 
-  // Data processing safely
-  const tasks = briefingData?.tasks_today || [];
+  // Data processing — field names aligned with backend API response
   const completedTasks = tasks.filter((t: any) => t.status === "completed").length;
   const taskProgress = tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
   
-  const events = briefingData?.calendar_events || [];
-  const expenses = briefingData?.upcoming_expenses || [];
-  const actionItems = briefingData?.email_action_items || [];
+  // API returns { briefing, action_items, summary: { tasks_count, events_count, bills_count, bills_total, action_items_count } }
+  const events = briefingData?.calendar_events || []; // calendar events from briefing if present
+  const actionItems: any[] = briefingData?.action_items || [];
   const activeActionItems = actionItems.filter((_: any, i: number) => !handledEmails.has(i));
+
+  const billsTotal = expenses.reduce((sum: number, e: any) => sum + (parseFloat(e.amount) || 0), 0);
 
   const quickStats = [
     { label: "Tasks Today", value: tasks.length || 0, trend: `${completedTasks} completed` },
-    { label: "Bills Due", value: briefingData?.bills_due_this_week?.count || 0, trend: `₹${briefingData?.bills_due_this_week?.total || 0} total` },
+    { label: "Bills Due", value: expenses.length, trend: `₹${billsTotal.toFixed(0)} total` },
     { label: "Action Items", value: activeActionItems.length, trend: `${handledEmails.size} handled` },
   ];
 
@@ -175,7 +196,7 @@ export default function DashboardPage() {
                     </div>
                   ) : (
                     <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap h-auto">
-                      {briefingData?.briefing_text || "No briefing generated for today."}
+                      {briefingData?.briefing || "No briefing generated for today."}
                     </div>
                   )}
                 </div>

@@ -14,7 +14,7 @@ class Config:
     FLASK_ENV = os.getenv("FLASK_ENV", "development")
     FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
     JWT_EXPIRY_HOURS = 24 * 7
-    GROQ_MODEL = os.getenv("GROQ_MODEL", "llama3-8b-8192")
+    GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
     GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
     GOOGLE_SCOPES = [
         "openid",

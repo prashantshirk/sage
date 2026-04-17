@@ -12,8 +12,8 @@ def fetch_recent_emails(access_token, max_results=20):
     try:
         service = get_gmail_service(access_token)
         
-        # Absolute broadest query for testing
-        query = "newer_than:1d"
+        # Fetch last 7 days to catch fee/payment emails sent earlier in the week
+        query = "newer_than:7d"
         results = service.users().messages().list(userId='me', q=query, maxResults=max_results).execute()
         messages = results.get('messages', [])
         
@@ -49,9 +49,11 @@ def fetch_recent_emails(access_token, max_results=20):
                 'sender_email': sender_email,
                 'subject': subject,
                 'date': date,
-                'snippet': msg_detail.get('snippet', '')[:200]
+                'snippet': msg_detail.get('snippet', '')[:100]
             })
-            print(f"  - Subject: {subject} (from {sender_name})", flush=True)
+            safe_subject = subject.encode('ascii', 'replace').decode() if subject else "No Subject"
+            safe_sender = sender_name.encode('ascii', 'replace').decode() if sender_name else "Unknown Sender"
+            print(f"  - Subject: {safe_subject} (from {safe_sender})", flush=True)
             
         # Log fetch results to file
         with open("gmail_debug.log", "a", encoding="utf-8") as f:

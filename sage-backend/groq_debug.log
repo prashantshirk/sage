@@ -1,0 +1,728 @@
+
+--- [2026-04-17 23:30:07.825658] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay your 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Urgent Requirement for the role of Intern",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Meetup starting tomorrow",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "SummerHacks '26 starting in 1 hour",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Meetup update",
+    "urgency": "low"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Invitation to Bitcoin 102",
+    "urgency": "low"
+  }
+]
+
+--- [2026-04-17 23:30:14.481165] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay your 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Urgent Requirement for the role of Intern', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Meetup starting tomorrow', 'urgency': 'medium'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': \"SummerHacks '26 starting in 1 hour\", 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Meetup update', 'urgency': 'low'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Invitation to Bitcoin 102', 'urgency': 'low'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of the important things you need to focus on today. First, I see you've already completed your task of brushing your teeth, so that's a great start to the evening. However, there are a few urgent emails that require your attention. Aakash Prajapati has sent you two emails regarding pending fees, and you really need to take care of those as soon as possible. Additionally, you've received an email from Naukri Campus Jobs regarding an urgent requirement for an internship role. 
+
+Also, keep an eye on your calendar, as there are several events coming up in the next few days. You might want to check out the Mumbai AI x OpenClaw Meetup tomorrow, and don't forget that SummerHacks '26 is starting in just one hour. Make sure to prioritize these events and respond to the emails that need your immediate attention.
+
+As you wrap up your day, remember that taking care of these tasks and staying organized will not only help you manage your time more effectively but also give you a sense of accomplishment and relief. Take a deep breath, prioritize your tasks, and tackle them one by one. You got this, Prashant!
+
+--- [2026-04-17 23:31:06.731224] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay your 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Respond to urgent job requirement",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Attend Mumbai AI x OpenClaw Meetup",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "Attend SummerHacks '26",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Review updated meetup details",
+    "urgency": "low"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Respond to meetup invitation",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-17 23:31:15.424677] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay your 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Respond to urgent job requirement', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Attend Mumbai AI x OpenClaw Meetup', 'urgency': 'medium'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': \"Attend SummerHacks '26\", 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Review updated meetup details', 'urgency': 'low'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Respond to meetup invitation', 'urgency': 'medium'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+Today has been a productive day, and I'm glad to see that you've completed your task to brush your teeth on time. However, there are a few important things that need your attention. You have three urgent emails that require your response. Aakash Prajapati has sent you two emails regarding pending fees, and it's essential to pay the 600 rs fees as soon as possible. Additionally, you have a high-priority email from Naukri Campus Jobs regarding an urgent job requirement for the role of Intern. You should respond to this email as soon as possible.
+
+In terms of upcoming bills and expenses, you don't have any pressing deadlines in the next 7 days. However, you should keep an eye on your calendar for any upcoming events or appointments. As for today's calendar, you don't have any scheduled events.
+
+As you wind down for the evening, remember that staying on top of your tasks and responding to urgent emails will help you maintain a sense of control and productivity. Don't let these tasks pile up – tackle them head-on, and you'll be feeling more organized and confident in no time. Keep up the great work, and I'll be here to support you tomorrow!
+
+--- [2026-04-17 23:32:29.855695] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay your 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Urgent Requirement for the role of Intern",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Meetup starting tomorrow",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "Meetup starting in 1 hour",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Update for Meetup",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Invitation to Bitcoin 102",
+    "urgency": "low"
+  }
+]
+
+--- [2026-04-17 23:32:32.932366] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay your 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Urgent Requirement for the role of Intern', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Meetup starting tomorrow', 'urgency': 'medium'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': 'Meetup starting in 1 hour', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Update for Meetup', 'urgency': 'medium'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Invitation to Bitcoin 102', 'urgency': 'low'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of the important things you need to know today. First, let's get the good news out of the way - you've completed your reminder to brush your teeth, which is a great habit to keep up. 
+
+As for urgent matters, you've got a couple of high-priority emails from Aakash Prajapati regarding payment of fees. You also have a high-priority email from Naukri Campus Jobs about an urgent requirement for an internship role. Additionally, there's a high-priority email from Prem Thatikonda about a meetup starting in 1 hour. You might want to take a look at those as soon as possible.
+
+Lastly, I'd like to leave you with a thought. With great opportunities come great responsibilities. It's essential to stay organized and manage your time effectively to make the most of the opportunities that come your way. Remember to prioritize your tasks, and don't hesitate to reach out if you need any help. Have a great evening!
+
+--- [2026-04-17 23:33:18.119894] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay your 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Urgent Requirement for the role of Intern",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Meetup starting tomorrow",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "SummerHacks '26 starting in 1 hour",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Meetup update",
+    "urgency": "low"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Invitation to Bitcoin 102",
+    "urgency": "low"
+  }
+]
+
+--- [2026-04-17 23:33:29.641341] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay your 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Urgent Requirement for the role of Intern', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Meetup starting tomorrow', 'urgency': 'medium'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': \"SummerHacks '26 starting in 1 hour\", 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Meetup update', 'urgency': 'low'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Invitation to Bitcoin 102', 'urgency': 'low'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+It looks like you've had a productive day, Prashant. You've completed your reminder to brush your teeth. That's a great start to the evening. However, there are a few things that need your attention before the day ends. You've received a few urgent emails that require your immediate attention. Aakash Prajapati has sent you two emails regarding fees, one of which is high-priority. You also need to look into the email from Naukri Campus Jobs regarding an urgent requirement for an internship role.
+
+In terms of upcoming bills and expenses, you don't have any pressing deadlines in the next seven days, so you can breathe a sigh of relief there. However, it's always a good idea to stay on top of your finances, so make sure to check your accounts regularly.
+
+As you wrap up the day, remember that every challenge is an opportunity to learn and grow. Don't be afraid to take on new tasks and responsibilities – they can help you develop new skills and expand your horizons. Keep pushing forward, Prashant, and know that you've got this!
+
+--- [2026-04-17 23:34:13.288699] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Respond to API key expiration notice",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Respond to job opportunity",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "Respond to event update",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Respond to event update",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Respond to event update",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Respond to event invitation",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-17 23:34:27.555562] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Respond to API key expiration notice', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Respond to job opportunity', 'urgency': 'high'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': 'Respond to event update', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Respond to event update', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Respond to event update', 'urgency': 'high'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Respond to event invitation', 'urgency': 'medium'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of what you need to focus on today. First, let's tackle the urgent emails that require your attention. You've got several high-priority emails from Aakash Prajapati regarding outstanding fees, which you'll want to address as soon as possible. Additionally, there's an email from Naukri Campus Jobs about a job opportunity, and one from Prem Thatikonda about the SummerHacks '26 event starting in 1 hour. You should also check out the email from Nishant Desai regarding the Mumbai AI x OpenClaw Meetup #1, which is starting tomorrow.
+
+In terms of upcoming deadlines, I don't see any pressing bills or expenses on the horizon, but you do have an Active Groq API Key that's set to expire in 7 days. You'll want to respond to the notice from Groq's support team to ensure you don't lose access to your API key.
+
+Remember, Prashant, it's all about prioritizing and staying on top of your tasks. You've got this! Take a few minutes to review the emails and make a plan to tackle the most pressing ones first. And don't forget to take care of yourself – you've already completed a task today by brushing your teeth, so keep that momentum going!
+
+--- [2026-04-17 23:36:18.979606] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Respond to API key expiration notice",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Respond to job opportunity",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "Respond to event update",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Respond to event update",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3",
+    "summary": "Respond to event update",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "BitcoinWaale By Getbit",
+    "subject": "You are invited to Bitcoin 102: Understanding Bitcoin from First Principles",
+    "summary": "Respond to event invitation",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-17 23:36:23.940062] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Respond to API key expiration notice', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Respond to job opportunity', 'urgency': 'high'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': 'Respond to event update', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Respond to event update', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': 'Update for Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3', 'summary': 'Respond to event update', 'urgency': 'medium'}, {'sender_name': 'BitcoinWaale By Getbit', 'subject': 'You are invited to Bitcoin 102: Understanding Bitcoin from First Principles', 'summary': 'Respond to event invitation', 'urgency': 'medium'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+Today's been quite a productive day, and I'm glad to see that you've completed your reminder to brush your teeth right on schedule. However, I do have a few important updates that need your attention. Firstly, I noticed that you have three urgent emails from Aakash Prajapati regarding outstanding fees, which you should prioritize paying as soon as possible. Additionally, you have a high-priority email from the support team at Groq, reminding you to respond to their notice about your active API key expiring in 7 days. Lastly, you've received an invitation to a job opportunity from Naukri Campus Jobs and an event update from Prem Thatikonda regarding SummerHacks '26.
+
+In terms of upcoming deadlines, I don't see any pressing bills or expenses in the next 7 days, which is great news. However, it's essential to keep an eye on these emails and respond to them promptly, especially the ones marked as 'high' urgency.
+
+As you unwind tonight, remember that every task you complete and every decision you make brings you closer to your goals. Keep pushing forward, and don't hesitate to reach out if you need any assistance. You've got this, Prashant!
+
+--- [2026-04-17 23:37:00.110990] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Respond to internship opportunity",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow",
+    "summary": "Attend Mumbai AI x OpenClaw Meetup",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Prem Thatikonda",
+    "subject": "\u23f0 SummerHacks '26 is starting in 1 hour",
+    "summary": "Attend SummerHacks '26",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:37:06.667743] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew Groq API key before expiration', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Naukri Campus Jobs', 'subject': 'Prashant Shirke, Urgent Requirement for the role of Intern', 'summary': 'Respond to internship opportunity', 'urgency': 'high'}, {'sender_name': 'Nishant Desai', 'subject': '\u23f0 Mumbai AI x OpenClaw Meetup #\ufe0f\u20e31\ufe0f\u20e3 is starting tomorrow', 'summary': 'Attend Mumbai AI x OpenClaw Meetup', 'urgency': 'medium'}, {'sender_name': 'Prem Thatikonda', 'subject': \"\u23f0 SummerHacks '26 is starting in 1 hour\", 'summary': \"Attend SummerHacks '26\", 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of what you need to focus on tonight. It looks like you've already completed your reminder to brush your teeth - good job on staying on top of that! Now, let's take a look at your emails. You have several important ones that require your attention, with high urgency. It seems you need to renew your Groq API key, pay some fees (twice, actually), and respond to an internship opportunity. You also have a medium-priority email about a meetup tomorrow and a high-priority one about a hackathon starting in an hour.
+
+As for upcoming bills, you don't have any pressing ones in the next 7 days. However, with these emails and tasks, it's essential to prioritize them and tackle them tonight or first thing tomorrow. Don't forget to take a break and get some rest - you've got a busy day ahead!
+
+Remember, Prashant, "You don't have to be great to start, but you have to start to be great." Take it one task at a time, and you'll be on top of things in no time. Good luck, and have a great evening!
+
+--- [2026-04-17 23:37:13.055885] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: []\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of today's tasks for you. You've already completed your reminder to brush your teeth, so that's one task off your list. Since it was a reminder, it's likely you've taken care of your oral hygiene for the day.
+
+As for upcoming bills and expenses, you're clear for the next week, so you don't have any pressing financial deadlines to worry about. On the email front, your inbox is quiet, so you can take a deep breath and focus on more pressing matters.
+
+As you wind down for the evening, remember that every small task you complete, like brushing your teeth, contributes to a bigger sense of accomplishment. It's the consistency and discipline that come with completing these small tasks that can have a profound impact on your overall well-being and productivity. Keep up the good work, Prashant!
+
+--- [2026-04-17 23:40:32.284065] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before it expires in 7 days",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:40:35.645379] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew Groq API key before it expires in 7 days', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of what you need to focus on tonight. First, congratulations on completing your reminder to brush your teeth - that's a great habit to maintain! However, I do want to bring to your attention a few urgent matters. 
+
+You have two high-priority emails from Aakash Prajapati and support@groq.com. It seems you need to pay 600 rs in fees, and also renew your Groq API key before it expires in 7 days. These are both time-sensitive, so make sure to take care of them as soon as possible. 
+
+As for your schedule, you've got a clear slate for tonight, so you can use this time to tackle these tasks and get ahead. Remember, taking care of small tasks now can save you a lot of stress and hassle in the long run.
+
+--- [2026-04-17 23:40:43.860381] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:40:49.107712] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): []\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew Groq API key before expiration', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of what you need to focus on today. You've already completed one task - brushing your teeth! That's a great start to the evening. However, there are a few things that require your attention. You have two urgent emails from Aakash Prajapati regarding pending fees. It's essential to take care of these as soon as possible. Additionally, you've received an email from Groq's support team reminding you that your API key will expire in 7 days. Make sure to renew it before it's too late.
+
+In terms of upcoming bills and expenses, you don't have any pressing ones in the next 7 days. However, it's always a good idea to review your finances and plan for any potential expenses. As for your calendar, you don't have any events scheduled for today.
+
+Here's a final thought for the day: "The best way to get started is to quit talking and begin doing." - Walt Disney. Remember to stay focused and tackle those urgent tasks head-on. You got this!
+
+--- [2026-04-17 23:41:49.197954] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "my ola subriciption is ending day after tomrrow which cost aorund 70 rs add it in my alerts and calamnder and remind"
+  }
+]
+Response: {
+  "action": "add_task",
+  "title": "Ola Subscription Renewal",
+  "due_date": "2026-04-18",
+  "due_time": "",
+  "note": "Renew Ola subscription",
+  "category": "calendar|reminder"
+} {
+  "action": "add_expense",
+  "name": "Ola Subscription",
+  "amount": 70,
+  "due_date": "2026-04-18",
+  "category": "subscription",
+  "recurring": true,
+  "recurrence_interval": "monthly",
+  "notes": ""
+} {
+  "action": "add_reminder",
+  "title": "Ola Subscription Renewal",
+  "due_date": "2026-04-18",
+  "note": "Renew Ola subscription"
+}
+
+--- [2026-04-17 23:42:21.166031] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "my ola subriciption is ending day after tomrrow which cost aorund 70 rs add it in calander too"
+  }
+]
+Response: {"action": "add_expense", "name": "OLA subscription", "amount": 70, "due_date": "2026-04-18", "category": "subscription", "recurring": true, "recurrence_interval": "monthly", "notes": "ends tomorrow"}
+
+--- [2026-04-17 23:43:20.355158] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:43:21.683504] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): [{'_id': '69e27805264394f1ad5eb43e', 'user_id': '69e25291adc179601357d8a0', 'name': 'OLA subscription', 'amount': 70.0, 'currency': 'INR', 'due_date': '2026-04-18T00:00:00', 'category': 'subscription', 'status': 'due_soon', 'recurring': True, 'recurrence_interval': 'monthly', 'notes': 'ends tomorrow', 'created_at': '2026-04-17T18:12:21.166000'}]\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew Groq API key before expiration', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+Today has been a productive day, and you've already completed one of your reminders, 'brush my teeth', right on time. However, there are a few things that require your attention moving forward. You have an upcoming OLA subscription bill that's due tomorrow and amounts to 70 INR. It's essential to make the payment before the due date to avoid any inconvenience.
+
+Regarding emails, you have a couple of high-priority messages from Aakash Prajapati and Groq support. Aakash has sent you reminders to pay 600 rs fees, and Groq support is warning you that your active API key will expire in 7 days. These are both critical tasks that need your immediate attention.
+
+As you wrap up the day, remember that staying on top of your reminders and bills is key to maintaining a smooth and organized life. Don't let these tasks pile up, and you'll be able to enjoy a stress-free tomorrow. Keep up the great work!
+
+--- [2026-04-17 23:43:31.356996] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay outstanding fees of 600 rs",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:43:35.500208] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): [{'_id': '69e27805264394f1ad5eb43e', 'user_id': '69e25291adc179601357d8a0', 'name': 'OLA subscription', 'amount': 70.0, 'currency': 'INR', 'due_date': '2026-04-18T00:00:00', 'category': 'subscription', 'status': 'due_soon', 'recurring': True, 'recurrence_interval': 'monthly', 'notes': 'ends tomorrow', 'created_at': '2026-04-17T18:12:21.166000'}]\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew API key before expiration', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay outstanding fees of 600 rs', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I've got a quick rundown of the important things you need to focus on tonight. First, I noticed that you've completed one of your reminders, which is great job on getting that out of the way. Now, let's move on to the tasks at hand. You have an upcoming bill that's due soon - your OLA subscription is due tomorrow, and it's set to recur monthly. Make sure to take care of that before the deadline.
+
+Regarding emails, I've got two high-priority messages from Aakash Prajapati and Groq support. Aakash has sent you two emails about paying outstanding fees of 600 rs, and Groq support is reminding you to renew your active API key before it expires in 7 days. These are both time-sensitive, so I recommend taking a look at them as soon as possible.
+
+Lastly, don't forget to stay on top of your finances and make timely payments to avoid any late fees or penalties. You got this, Prashant! Remember, taking care of these tasks now will save you time and stress in the long run. Keep up the great work, and I'll be here to support you through it all.
+
+--- [2026-04-17 23:49:34.991027] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before it expires in 7 days",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:49:40.422689] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): [{'_id': '69e27805264394f1ad5eb43e', 'user_id': '69e25291adc179601357d8a0', 'name': 'OLA subscription', 'amount': 70.0, 'currency': 'INR', 'due_date': '2026-04-18T00:00:00', 'category': 'subscription', 'status': 'due_soon', 'recurring': True, 'recurrence_interval': 'monthly', 'notes': 'ends tomorrow', 'created_at': '2026-04-17T18:12:21.166000'}]\nRecent emails needing attention: [{'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew Groq API key before it expires in 7 days', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay 600 rs fees', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+I wanted to bring a few things to your attention as the day comes to a close. You've already completed your daily reminder to brush your teeth, which is a great habit to maintain. Now, let's focus on the tasks that need your attention tomorrow. You have an OLA subscription that's due for renewal, and it's essential to take care of that before it expires. I've also noticed that you have a few urgent emails from Aakash Prajapati regarding payment of fees, and you'll want to address those as soon as possible.
+
+In terms of upcoming deadlines, you have a high-priority email from Groq support regarding the renewal of your API key, which will expire in 7 days. I recommend taking care of that and the OLA subscription renewal as soon as possible to avoid any potential disruptions.
+
+As you head into the evening, remember that staying on top of your commitments and tasks is key to achieving your goals. It's great that you've already completed your daily reminder, and I'm confident that you'll tackle the rest of your tasks with ease. Keep up the good work, and don't hesitate to reach out if you need any further assistance.
+
+--- [2026-04-17 23:49:47.503461] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew the Groq API key before it expires in 7 days",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay the outstanding fees of 600 rs",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay the outstanding fees of 600 rs",
+    "urgency": "high"
+  }
+]
+
+--- [2026-04-17 23:49:54.148971] Daily Briefing Generation ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Today's date: April 17, 2026\nTasks today: [{'_id': '69e252b6adc179601357d8a1', 'user_id': '69e25291adc179601357d8a0', 'title': 'brush my teeth', 'note': '', 'due_date': '2026-04-17T00:00:00', 'due_time': None, 'category': 'reminder', 'status': 'completed', 'source': 'nlp', 'google_event_id': None, 'created_at': '2026-04-17T15:33:10.185000', 'completed_at': '2026-04-17T16:02:19.130000'}]\nUpcoming bills/expenses (next 7 days): [{'_id': '69e27805264394f1ad5eb43e', 'user_id': '69e25291adc179601357d8a0', 'name': 'OLA subscription', 'amount': 70.0, 'currency': 'INR', 'due_date': '2026-04-18T00:00:00', 'category': 'subscription', 'status': 'due_soon', 'recurring': True, 'recurrence_interval': 'monthly', 'notes': 'ends tomorrow', 'created_at': '2026-04-17T18:12:21.166000'}]\nRecent emails needing attention: [{'sender_name': 'Nishant Desai', 'subject': 'Mumbai AI x OpenClaw: Quick Reminders', 'summary': 'Confirm attendance and arrive on time for the event', 'urgency': 'high'}, {'sender_name': 'support@groq.com', 'subject': 'Action Required: Your Active Groq API Key will expire in 7 days', 'summary': 'Renew the Groq API key before it expires in 7 days', 'urgency': 'medium'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pay fees', 'summary': 'Pay the outstanding fees of 600 rs', 'urgency': 'high'}, {'sender_name': 'Aakash Prajapati', 'subject': 'Pending fees', 'summary': 'Pay the outstanding fees of 600 rs', 'urgency': 'high'}]\nCalendar events today: []"
+  }
+]
+Response: Evening, Prashant Shirke!
+
+It's been a busy day, and I've got a few key things to bring to your attention. First, let's talk about your tasks. You've already completed brushing your teeth, which is a great start to the evening. Now, let's focus on the tasks that need your attention tomorrow. You have an OLA subscription that's due soon, with an amount of 70 INR. Don't forget to settle that by tomorrow.
+
+Urgent emails also require your attention. You have a high-priority email from Nishant Desai, reminding you to confirm your attendance and arrive on time for the Mumbai AI x OpenClaw event. Additionally, you have another high-priority email from Aakash Prajapati, asking you to pay the outstanding fees of 600 rs. Lastly, you also have an email from support@groq.com, reminding you to renew your Groq API key before it expires in 7 days. These are all important reminders that you should address as soon as possible.
+
+As you wind down tonight, remember that productivity is not just about completing tasks, but also about being mindful of the deadlines and reminders that come your way. Stay focused, and you'll be able to tackle tomorrow's challenges with ease.

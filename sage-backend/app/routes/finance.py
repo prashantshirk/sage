@@ -28,7 +28,7 @@ def get_expenses():
     monthly_total = get_monthly_total(db, user_id)
     
     overdue_count = sum(1 for e in expenses if e.get("status") == "overdue")
-    due_soon_count = sum(1 for e in expenses if e.get("status") == "pending")
+    due_soon_count = sum(1 for e in expenses if e.get("status") == "due_soon")
     
     return jsonify({
         "expenses": expenses,
@@ -111,7 +111,7 @@ def summary():
             overdue_count += 1
             
         due_date_str = e.get("due_date")
-        if due_date_str and e.get("status") in ["pending", "overdue"]:
+        if due_date_str and e.get("status") != "paid":
             try:
                 due_date = parser.parse(due_date_str)
                 days_diff = (due_date.date() - now.date()).days

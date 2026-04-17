@@ -3,7 +3,7 @@ from datetime import datetime
 from ..models.user import get_user_by_id
 from ..models.task import get_todays_tasks
 from ..models.expense import get_upcoming_expenses
-from ..services import gmail_service, calendar_service, gemini_service
+from ..services import gmail_service, calendar_service, groq_service
 from ..services.google_auth import refresh_google_token_if_needed
 
 briefing_bp = Blueprint('briefing', __name__)
@@ -50,16 +50,16 @@ def daily_briefing():
     action_items = []
     if access_token:
         current_app.logger.info("  - Fetching Gmail messages...")
-        recent_emails = gmail_service.fetch_recent_emails(access_token, max_results=20)
+        recent_emails = gmail_service.fetch_recent_emails(access_token, max_results=5)
         if recent_emails:
             current_app.logger.info(f"  - Scanning {len(recent_emails)} emails for action items...")
             action_items = gmail_service.extract_action_items(recent_emails)
         else:
             current_app.logger.info("  - No emails found in fetch range.")
 
-    # Use Gemini for briefing generation (higher quotas, better quality)
-    current_app.logger.info("  - Generating briefing using Gemini...")
-    briefing_text = gemini_service.generate_daily_briefing(
+    # Use Groq for briefing generation (bypassing Gemini quota limits)
+    current_app.logger.info("  - Generating briefing using Groq...")
+    briefing_text = groq_service.generate_daily_briefing(
         user_name=user_name,
         tasks_today=tasks,
         upcoming_expenses=expenses,
@@ -101,7 +101,7 @@ def email_action_items():
     if not access_token:
         return jsonify({"error": "Google account not connected"}), 400
 
-    recent_emails = gmail_service.fetch_recent_emails(access_token, max_results=20)
+    recent_emails = gmail_service.fetch_recent_emails(access_token, max_results=5)
     action_items = gmail_service.extract_action_items(recent_emails)
 
     return jsonify(action_items)

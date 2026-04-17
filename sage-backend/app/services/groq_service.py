@@ -6,7 +6,7 @@ from groq import Groq
 
 # Rate-limit tracking (in-process, per worker)
 _last_call_time = 0.0
-_MIN_CALL_INTERVAL_SECONDS = 2.5  # ~24 RPM safe limit for 30 RPM cap
+_MIN_CALL_INTERVAL_SECONDS = 5.0  # conservative rate limit: avoids 429s on free tier
 
 def _rate_limit_wait():
     """Enforce a minimum interval between Groq API calls to avoid 429s."""
@@ -31,7 +31,7 @@ def call_groq(messages, system_prompt, max_tokens=400, temperature=0.3, purpose=
             return None
 
         # Hard-cap tokens to avoid burning through TPM allowance
-        max_tokens = min(max_tokens, 512)
+        max_tokens = min(max_tokens, 1024)
 
         _rate_limit_wait()
 
@@ -116,3 +116,32 @@ def generate_response_message(action, extracted_data, success):
         return "Here is the information you requested. 📊"
 
     return "I've processed your request. 👍"
+
+def generate_daily_briefing(user_name, tasks_today, upcoming_expenses, email_summaries, calendar_events):
+    today = datetime.now(timezone.utc).strftime("%B %d, %Y")
+    
+    current_hour = datetime.now().hour
+    time_greeting = "morning"
+    if 12 <= current_hour < 17:
+        time_greeting = "afternoon"
+    elif current_hour >= 17:
+        time_greeting = "evening"
+
+    system_prompt = f"""You are Sage, a personal chief of staff AI. Write a warm {time_greeting} briefing for {user_name}.
+Guidelines:
+- Start with a warm "{time_greeting.capitalize()}, {user_name}!"
+- Summarize the most important things needing attention today.
+- Mention any urgent bills or deadlines.
+- End with a motivating or insightful note.
+- Keep it human, conversational, and actionable.
+- Use 2-3 short paragraphs. Do not use bullet points."""
+
+    user_message = f"""Today's date: {today}
+Tasks today: {tasks_today}
+Upcoming bills/expenses (next 7 days): {upcoming_expenses}
+Recent emails needing attention: {email_summaries}
+Calendar events today: {calendar_events}"""
+
+    messages = [{"role": "user", "content": user_message}]
+    
+    return call_groq(messages, system_prompt, max_tokens=800, temperature=0.5, purpose="Daily Briefing Generation")
