@@ -5,8 +5,10 @@ from app.models.task import create_task, get_todays_tasks
 from app.models.user import get_user_by_id
 from flask import current_app
 
-def process_natural_language_input(db, user_id, user_input, image_base64=None, mime_type="image/jpeg"):
-    if image_base64:
+def process_natural_language_input(db, user_id, user_input, image_base64=None, mime_type="image/jpeg", audio_base64=None, audio_mime_type="audio/webm"):
+    if audio_base64:
+        extracted = gemini_service.extract_data_from_audio(audio_base64, user_input, audio_mime_type)
+    elif image_base64:
         extracted = gemini_service.extract_data_from_image(image_base64, user_input, mime_type)
     else:
         extracted = groq_service.extract_structured_data(user_input)

@@ -37,76 +37,58 @@ export default function AskSagePage() {
   const originalTextRef = useRef<string>("");
   const [isListening, setIsListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<BlobPart[]>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && 
-       ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+    if (typeof window !== "undefined" && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       setVoiceSupported(true);
     }
   }, []);
 
-  const startVoiceInput = () => {
+  const startVoiceInput = async () => {
     if (isListening) {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+        mediaRecorderRef.current.stop();
+        mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
       }
       setIsListening(false);
       return;
     }
 
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || 
-      (window as any).webkitSpeechRecognition;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
 
-    if (!SpeechRecognition) {
-      toast.error("Voice input not supported in this browser. Use Chrome or Edge.");
-      return;
-    }
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
 
-    const recognition = new SpeechRecognition();
-    recognitionRef.current = recognition;
-    
-    // Use default browser language instead of hardcoding en-IN which can cause network errors
-    recognition.lang = window.navigator.language || "en-US";
-    recognition.continuous = true;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.readAsDataURL(audioBlob);
+        reader.onloadend = () => {
+          const base64data = reader.result as string;
+          // Format is data:audio/webm;base64,.....
+          const split = base64data.split(',');
+          const mimeType = split[0].split(':')[1].split(';')[0];
+          const base64 = split[1];
+          
+          handleSubmit(undefined, base64, mimeType);
+        };
+      };
 
-    recognition.onstart = () => {
+      mediaRecorder.start();
       setIsListening(true);
-      originalTextRef.current = inputText;
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
-
-    recognition.onerror = (event: any) => {
-      setIsListening(false);
-      console.error("Speech recognition error:", event.error, event);
-      if (event.error === "not-allowed") {
-        toast.error("Microphone permission denied. Please allow mic access in your browser.");
-      } else if (event.error === "no-speech") {
-        // Continuous mode might throw no-speech if quiet for too long
-        // toast.error("No speech detected. Try again.");
-      } else if (event.error === "network") {
-        toast.error("Network error: If using Brave, Speech API is blocked. Also ensure you are using localhost or HTTPS.");
-      } else {
-        toast.error(`Voice input failed (${event.error}). Try again.`);
-      }
-    };
-
-    recognition.onresult = (event: any) => {
-      let sessionTranscript = "";
-      for (let i = 0; i < event.results.length; i++) {
-        sessionTranscript += event.results[i][0].transcript;
-      }
-      
-      const base = originalTextRef.current;
-      setInputText(base + (base && sessionTranscript ? " " : "") + sessionTranscript.trim());
-    };
-
-    recognition.start();
+    } catch (err) {
+      console.error("Mic access denied or error:", err);
+      toast.error("Microphone permission denied or not supported.");
+    }
   };
 
   useEffect(() => {
@@ -165,10 +147,10 @@ export default function AskSagePage() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleSubmit = async (overrideText?: string) => {
+  const handleSubmit = async (overrideText?: string, audioBase64?: string, audioMimeType?: string) => {
     const textToSend = typeof overrideText === "string" ? overrideText : inputText;
     
-    if (!textToSend.trim() && !imageBase64) {
+    if (!textToSend.trim() && !imageBase64 && !audioBase64) {
       toast.error("Please enter something first.");
       return;
     }
@@ -176,7 +158,13 @@ export default function AskSagePage() {
     setIsLoading(true);
     setResult(null);
     try {
-      const res = await processNaturalLanguage(textToSend.trim(), imageBase64 || undefined, imageMimeType || undefined);
+      const res = await processNaturalLanguage(
+        textToSend.trim(), 
+        imageBase64 || undefined, 
+        imageMimeType || undefined,
+        audioBase64 || undefined,
+        audioMimeType || undefined
+      );
       setResult(res);
       setInputText("");
       setSelectedFile(null);

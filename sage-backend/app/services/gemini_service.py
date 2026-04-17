@@ -117,3 +117,53 @@ User prompt: {user_prompt}
     except Exception as e:
         print(f"Gemini Image Processing Error: {e}")
         return None
+
+def extract_data_from_audio(audio_base64, user_prompt="", mime_type="audio/webm"):
+    try:
+        api_key = current_app.config.get("GEMINI_API_KEY")
+        if not api_key:
+            return None
+
+        genai.configure(api_key=api_key)
+        # Use the specific lite model as requested
+        model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
+        
+        audio_data = base64.b64decode(audio_base64)
+        
+        today = datetime.now(timezone.utc).strftime("%B %d, %Y")
+        system_prompt = f"""You are a data extraction AI. Today's date is {today}.
+Listen to the provided audio voice note and read the user's prompt (if any).
+Extract structured data and return ONLY valid JSON with no explanation or markdown formatting.
+Identify the action as 'add_task', 'add_expense', or 'add_reminder'. 
+
+For add_task return: {{ "action": "add_task", "title": "", "note": "", "due_date": "", "due_time": "", "category": "personal" }}
+For add_expense return: {{ "action": "add_expense", "name": "", "amount": 0, "due_date": "", "category": "bill", "notes": "" }}
+
+If a due date is not explicitly found, try to infer it from the audio (e.g. "tomorrow"). Use absolute dates (YYYY-MM-DD).
+User prompt (optional context): {user_prompt}
+"""
+        
+        print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Audio Extraction", flush=True)
+        response = model.generate_content([
+            {'mime_type': mime_type, 'data': audio_data},
+            system_prompt
+        ])
+        
+        text = response.text.strip()
+        if text.startswith("```json"):
+            text = text[7:]
+        if text.startswith("```"):
+            text = text[3:]
+        if text.endswith("```"):
+            text = text[:-3]
+            
+        parsed = json.loads(text.strip())
+        
+        with open("gemini_debug.log", "a", encoding="utf-8") as f:
+            f.write(f"\n--- [{datetime.now()}] Audio Extraction ---\n")
+            f.write(f"Response: {text}\n")
+            
+        return parsed
+    except Exception as e:
+        print(f"Gemini Audio Processing Error: {e}")
+        return None

@@ -54,8 +54,14 @@ export const unlinkTelegram = async (): Promise<void> => {
 };
 
 // 3. NLP functions
-export async function processNaturalLanguage(input: string, imageBase64?: string, mimeType?: string) {
-  return apiCall("POST", "/api/nlp/process", { input, image_base64: imageBase64, mime_type: mimeType });
+export async function processNaturalLanguage(input: string, imageBase64?: string, mimeType?: string, audioBase64?: string, audioMimeType?: string) {
+  return apiCall("POST", "/api/nlp/process", { 
+    input, 
+    image_base64: imageBase64, 
+    mime_type: mimeType,
+    audio_base64: audioBase64,
+    audio_mime_type: audioMimeType
+  });
 }
 
 export async function getSuggestions() {
