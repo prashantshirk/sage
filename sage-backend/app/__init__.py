@@ -12,6 +12,18 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    # Configure logging
+    import logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s',
+        handlers=[
+            logging.FileHandler("sage_server.log"),
+            logging.StreamHandler()
+        ]
+    )
+    app.logger.info("Sage Backend Starting...")
+
     CORS(
         app,
         resources={r"/*": {"origins": [app.config["FRONTEND_URL"]]}},

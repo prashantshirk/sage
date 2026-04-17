@@ -49,18 +49,46 @@ def fetch_todays_events(access_token, timezone_str="Asia/Kolkata"):
         print(f"Calendar Fetch Error: {e}")
         return []
 
-def create_calendar_event(access_token, title, date_str, time_str=None, description="", duration_minutes=60):
+def create_calendar_event(tokens, title, date_str, time_str=None, description="", duration_minutes=60):
     try:
-        service = get_calendar_service(access_token)
+        if isinstance(tokens, str):
+            # Backwards compatibility for raw access token
+            creds = Credentials(token=tokens)
+        else:
+            creds = _credentials_from_dict(tokens)
+            # Try to refresh if possible
+            if creds.expired and creds.refresh_token:
+                import google.auth.transport.requests
+                creds.refresh(google.auth.transport.requests.Request())
+        
+        service = build('calendar', 'v3', credentials=creds, cache_discovery=False)
         
         event = {
             'summary': title,
             'description': description,
         }
         
+        # Normalize date_str to string if it's a datetime object
+        if isinstance(date_str, datetime):
+            date_only_str = date_str.strftime("%Y-%m-%d")
+        else:
+            date_only_str = str(date_str)
+
         if time_str:
-            start_dt_str = f"{date_str}T{time_str}:00"
-            start_dt = datetime.fromisoformat(start_dt_str)
+            # If date_only_str already has a time or T, clean it
+            if ' ' in date_only_str:
+                date_only_str = date_only_str.split(' ')[0]
+            if 'T' in date_only_str:
+                date_only_str = date_only_str.split('T')[0]
+                
+            start_dt_str = f"{date_only_str}T{time_str}:00"
+            try:
+                start_dt = datetime.fromisoformat(start_dt_str)
+            except ValueError:
+                # Fallback for other formats
+                from dateutil import parser
+                start_dt = parser.parse(start_dt_str)
+                
             end_dt = start_dt + timedelta(minutes=duration_minutes)
             
             event['start'] = {
@@ -72,15 +100,17 @@ def create_calendar_event(access_token, title, date_str, time_str=None, descript
                 'timeZone': 'Asia/Kolkata',
             }
         else:
-            if 'T' in date_str:
-                date_str = date_str.split('T')[0]
+            if ' ' in date_only_str:
+                date_only_str = date_only_str.split(' ')[0]
+            if 'T' in date_only_str:
+                date_only_str = date_only_str.split('T')[0]
                 
             event['start'] = {
-                'date': date_str,
+                'date': date_only_str,
                 'timeZone': 'Asia/Kolkata',
             }
             event['end'] = {
-                'date': date_str,
+                'date': date_only_str,
                 'timeZone': 'Asia/Kolkata',
             }
             

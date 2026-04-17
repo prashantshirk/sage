@@ -15,7 +15,7 @@ class Config:
     FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
     JWT_EXPIRY_HOURS = 24 * 7
     GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
-    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-lite")
+    GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3-flash-preview")
     GOOGLE_SCOPES = [
         "openid",
         "https://www.googleapis.com/auth/userinfo.email",

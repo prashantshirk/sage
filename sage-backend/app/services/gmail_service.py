@@ -1,20 +1,23 @@
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
 import json
-from app.services import groq_service
+import google.oauth2.credentials
+from googleapiclient.discovery import build
+from . import groq_service
+from datetime import datetime
 
 def get_gmail_service(access_token):
-    creds = Credentials(token=access_token)
-    return build('gmail', 'v1', credentials=creds, cache_discovery=False)
+    creds = google.oauth2.credentials.Credentials(access_token)
+    return build('gmail', 'v1', credentials=creds)
 
 def fetch_recent_emails(access_token, max_results=20):
     try:
         service = get_gmail_service(access_token)
         
-        query = "in:inbox -category:promotions -category:social newer_than:2d"
+        # Absolute broadest query for testing
+        query = "newer_than:1d"
         results = service.users().messages().list(userId='me', q=query, maxResults=max_results).execute()
         messages = results.get('messages', [])
         
+        print(f"Gmail: Fetched {len(messages)} potential messages.", flush=True)
         email_list = []
         for msg in messages:
             msg_id = msg['id']
@@ -48,10 +51,17 @@ def fetch_recent_emails(access_token, max_results=20):
                 'date': date,
                 'snippet': msg_detail.get('snippet', '')[:200]
             })
+            print(f"  - Subject: {subject} (from {sender_name})", flush=True)
             
+        # Log fetch results to file
+        with open("gmail_debug.log", "a", encoding="utf-8") as f:
+            f.write(f"\n--- [{datetime.now()}] Gmail Fetch ({len(email_list)} emails) ---\n")
+            for e in email_list:
+                f.write(f"Subject: {e['subject']} | From: {e['sender_name']} | Snippet: {e['snippet']}\n")
+                
         return email_list
     except Exception as e:
-        print(f"Gmail Fetch Error: {e}")
+        print(f"Gmail Fetch Error: {e}", flush=True)
         return []
 
 def extract_action_items(emails_list):
@@ -61,12 +71,18 @@ def extract_action_items(emails_list):
     try:
         emails_json = json.dumps(emails_list, indent=2)
         system_prompt = f"""You are an email triage assistant. Given these emails, identify which ones need action.
-Return a JSON array of action items only (skip newsletters, receipts, notifications).
+Focus especially on:
+- Payment requests, fee reminders, or invoices.
+- Requests for information or meetings.
+- Direct questions from people.
+
+DO NOT skip emails that ask for money or fees. 
+Return a JSON array of action items only. Skip marketing, newsletters, or generic automated system notifications (unless they are bills).
 For each actionable email return: {{ "sender_name": "...", "subject": "...", "summary": "one line, what action needed", "urgency": "high|medium|low" }}
 Emails: {emails_json}
 Return only the JSON array."""
 
-        response_text = groq_service.call_groq([], system_prompt, max_tokens=1000, temperature=0.1)
+        response_text = groq_service.call_groq([], system_prompt, max_tokens=1000, temperature=0.1, purpose="Email Action Item Extraction")
         
         if not response_text:
             return []
@@ -77,7 +93,9 @@ Return only the JSON array."""
         if cleaned_text.endswith("```"):
             cleaned_text = cleaned_text[:-3]
             
-        return json.loads(cleaned_text.strip())
+        items = json.loads(cleaned_text.strip())
+        print(f"Gmail: Extracted {len(items)} action items.", flush=True)
+        return items
     except Exception as e:
-        print(f"Email Extraction Error: {e}")
+        print(f"Email Extraction Error: {e}", flush=True)
         return []

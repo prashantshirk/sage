@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from flask import current_app
 from groq import Groq
 
-def call_groq(messages, system_prompt, max_tokens=1000, temperature=0.3):
+def call_groq(messages, system_prompt, max_tokens=1000, temperature=0.3, purpose="General Request"):
     try:
         api_key = current_app.config.get("GROQ_API_KEY")
         if not api_key:
@@ -11,6 +11,9 @@ def call_groq(messages, system_prompt, max_tokens=1000, temperature=0.3):
         
         client = Groq(api_key=api_key)
         model = current_app.config.get("GROQ_MODEL", "llama-3.3-70b-versatile")
+        
+        # Detailed logging
+        print(f"[{datetime.now()}] Pinging Model: {model} | Purpose: {purpose}", flush=True)
         
         all_messages = [{"role": "system", "content": system_prompt}] + messages
         
@@ -20,9 +23,17 @@ def call_groq(messages, system_prompt, max_tokens=1000, temperature=0.3):
             temperature=temperature,
             max_tokens=max_tokens,
         )
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
+        
+        # Log to file for debugging
+        with open("groq_debug.log", "a", encoding="utf-8") as f:
+            f.write(f"\n--- [{datetime.now()}] {purpose} ---\n")
+            f.write(f"Messages: {json.dumps(messages, indent=2)}\n")
+            f.write(f"Response: {content}\n")
+            
+        return content
     except Exception as e:
-        print(f"Groq API Error: {e}")
+        print(f"Groq API Error during {purpose}: {e}")
         return None
 
 def extract_structured_data(user_input):
@@ -40,7 +51,7 @@ Today's date is {today}. Parse relative dates like 'tomorrow', 'next Tuesday', '
 Return only the JSON object, nothing else."""
 
     messages = [{"role": "user", "content": user_input}]
-    response_text = call_groq(messages, system_prompt, max_tokens=500, temperature=0.1)
+    response_text = call_groq(messages, system_prompt, max_tokens=500, temperature=0.1, purpose="NLP Input Parsing")
     
     if not response_text:
         return None
@@ -73,7 +84,7 @@ def generate_response_message(action, extracted_data, success):
         title = extracted_data.get("title", "Reminder")
         return f"All set! I will remind you about '{title}'. ⏰"
         
-    if action == "query":
+    if action == "action":
         return "Here is the information you requested. 📊"
         
     return "I've processed your request. 👍"

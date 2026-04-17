@@ -174,7 +174,7 @@ export default function DashboardPage() {
                       <div className="h-4 bg-secondary animate-pulse rounded w-4/6" />
                     </div>
                   ) : (
-                    <div className="text-sm text-muted-foreground prose prose-sm dark:prose-invert max-w-none whitespace-pre-line">
+                    <div className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap h-auto">
                       {briefingData?.briefing_text || "No briefing generated for today."}
                     </div>
                   )}
