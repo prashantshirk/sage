@@ -34,6 +34,7 @@ export default function AskSagePage() {
   const [imageMimeType, setImageMimeType] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<any>(null);
+  const originalTextRef = useRef<string>("");
   const [isListening, setIsListening] = useState(false);
   const [voiceSupported, setVoiceSupported] = useState(false);
 
@@ -73,6 +74,7 @@ export default function AskSagePage() {
 
     recognition.onstart = () => {
       setIsListening(true);
+      originalTextRef.current = inputText;
     };
 
     recognition.onend = () => {
@@ -95,11 +97,13 @@ export default function AskSagePage() {
     };
 
     recognition.onresult = (event: any) => {
-      let newTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        newTranscript += event.results[i][0].transcript;
+      let sessionTranscript = "";
+      for (let i = 0; i < event.results.length; i++) {
+        sessionTranscript += event.results[i][0].transcript;
       }
-      setInputText(prev => prev + (prev ? " " : "") + newTranscript.trim());
+      
+      const base = originalTextRef.current;
+      setInputText(base + (base && sessionTranscript ? " " : "") + sessionTranscript.trim());
     };
 
     recognition.start();
