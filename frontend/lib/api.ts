@@ -126,3 +126,9 @@ export async function submitDailyProgress(tasks_total: number, tasks_completed: 
 export async function getStreakHistory() {
   return apiCall("GET", "/api/streak/history");
 }
+
+// 8. Search functions
+export async function searchSage(query: string) {
+  if (!query) return { tasks: [], expenses: [] };
+  return apiCall("GET", `/api/search?q=${encodeURIComponent(query)}`);
+}

@@ -864,3 +864,646 @@ Response: [
     "urgency": "high"
   }
 ]
+
+--- [2026-04-18 02:26:47.646891] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:27:03.045524] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:30:47.674501] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:30:59.645667] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI experience",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:43:13.508055] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "add a meeting schedule for tomorrow in calendar and the task at 7 pm"
+  }
+]
+Response: {"action": "add_task", "title": "meeting schedule", "due_date": "2026-04-18", "due_time": "19:00", "note": "", "category": "calendar|reminder"}
+
+--- [2026-04-18 02:44:27.455421] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "the meeting i told you to schedule for tomrrow the meeting is cancelled reschedule it for 23 april"
+  }
+]
+Response: {"action": "reschedule", "target_name": "meeting", "new_date": "2026-04-23", "new_time": ""}
+
+--- [2026-04-18 02:50:11.204185] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "reschedule my meeting to April 24th"
+  }
+]
+Response: {"action": "reschedule", "target_name": "meeting", "new_date": "2026-04-24", "new_time": ""}
+
+--- [2026-04-18 02:55:34.185913] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:55:53.113736] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:56:07.317766] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 02:58:28.114619] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:00:27.729725] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "add marketing meeting at 21 apr at 8  pm add it to calander too"
+  }
+]
+Response: {"action": "add_task", "title": "marketing meeting", "due_date": "2026-04-21", "due_time": "20:00", "note": "", "category": "calendar|reminder"}
+
+--- [2026-04-18 03:01:16.939083] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "the marketing meeting from 21 apr reschdule it to 25 apr 10 am in the morning"
+  }
+]
+Response: {"action": "reschedule", "target_name": "marketing meeting", "new_date": "2026-04-25", "new_time": "10:00"}
+
+--- [2026-04-18 03:08:37.367458] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:08:56.537438] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:14:19.794867] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:14:37.018919] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:16:07.845889] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:16:19.972032] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:16:43.877770] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:17:02.784645] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate the Groq API key before it expires",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to the direct question about building AI",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:17:09.680712] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and arrive on time for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate the Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to the direct question about building AI projects",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:17:20.427517] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:18:03.735411] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:18:13.259834] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:19:22.847917] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:19:31.768531] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:21:45.071675] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:21:59.336086] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:28:57.448339] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or reactivate Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]
+
+--- [2026-04-18 03:29:07.857720] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Confirm attendance and timing for the event",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew or update Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question about AI project",
+    "urgency": "medium"
+  }
+]

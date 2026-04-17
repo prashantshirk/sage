@@ -160,3 +160,66 @@ def get_calendar_events(tokens: dict, max_results: int = 10):
         .execute()
     )
     return results.get("items", [])
+
+def update_calendar_event(tokens, event_id, date_str, time_str=None, duration_minutes=60):
+    try:
+        if isinstance(tokens, str):
+            creds = Credentials(token=tokens)
+        else:
+            creds = _credentials_from_dict(tokens)
+            if creds.expired and creds.refresh_token:
+                import google.auth.transport.requests
+                creds.refresh(google.auth.transport.requests.Request())
+        
+        service = build('calendar', 'v3', credentials=creds, cache_discovery=False)
+        
+        event_patch = {}
+        
+        if isinstance(date_str, datetime):
+            date_only_str = date_str.strftime("%Y-%m-%d")
+        else:
+            date_only_str = str(date_str)
+
+        if time_str:
+            if ' ' in date_only_str:
+                date_only_str = date_only_str.split(' ')[0]
+            if 'T' in date_only_str:
+                date_only_str = date_only_str.split('T')[0]
+                
+            start_dt_str = f"{date_only_str}T{time_str}:00"
+            try:
+                start_dt = datetime.fromisoformat(start_dt_str)
+            except ValueError:
+                from dateutil import parser
+                start_dt = parser.parse(start_dt_str)
+                
+            end_dt = start_dt + timedelta(minutes=duration_minutes)
+            
+            event_patch['start'] = {
+                'dateTime': start_dt.isoformat(),
+                'timeZone': 'Asia/Kolkata',
+            }
+            event_patch['end'] = {
+                'dateTime': end_dt.isoformat(),
+                'timeZone': 'Asia/Kolkata',
+            }
+        else:
+            if ' ' in date_only_str:
+                date_only_str = date_only_str.split(' ')[0]
+            if 'T' in date_only_str:
+                date_only_str = date_only_str.split('T')[0]
+                
+            event_patch['start'] = {
+                'date': date_only_str,
+                'timeZone': 'Asia/Kolkata',
+            }
+            event_patch['end'] = {
+                'date': date_only_str,
+                'timeZone': 'Asia/Kolkata',
+            }
+            
+        updated_event = service.events().patch(calendarId='primary', eventId=event_id, body=event_patch).execute()
+        return updated_event.get('id')
+    except Exception as e:
+        print(f"Calendar Update Error: {e}")
+        return None

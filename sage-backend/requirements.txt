@@ -11,3 +11,4 @@ requests
 google-generativeai
 python-dateutil
 certifi
+apscheduler

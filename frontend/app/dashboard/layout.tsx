@@ -16,12 +16,15 @@ import {
   Bell,
   Search,
   LogOut,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { isLoggedIn, handleOAuthCallback, clearToken } from "@/lib/auth";
-import { getCurrentUser } from "@/lib/api";
+import { getCurrentUser, searchSage } from "@/lib/api";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Overview" },
@@ -40,11 +43,22 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<{tasks: any[], expenses: any[]} | null>(null);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
 
   useEffect(() => {
+    // Restore accent preference from localStorage
+    const savedAccent = localStorage.getItem('sage-accent');
+    if (savedAccent && savedAccent !== 'amber') {
+      document.documentElement.setAttribute('data-accent', savedAccent);
+    }
+
     handleOAuthCallback(router);
 
     if (!isLoggedIn()) {
@@ -67,6 +81,28 @@ export default function DashboardLayout({
 
     fetchUser();
   }, [router]);
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      if (searchQuery.trim().length > 1) {
+        setIsSearching(true);
+        try {
+          const results = await searchSage(searchQuery);
+          setSearchResults(results);
+          setShowSearchDropdown(true);
+        } catch (e) {
+          console.error("Search failed", e);
+        } finally {
+          setIsSearching(false);
+        }
+      } else {
+        setSearchResults(null);
+        setShowSearchDropdown(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
 
   const handleLogout = () => {
     clearToken();
@@ -184,14 +220,74 @@ export default function DashboardLayout({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => {
+                    if (searchResults) setShowSearchDropdown(true);
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => setShowSearchDropdown(false), 200);
+                  }}
                   className="pl-9 w-64 bg-secondary border-border focus:border-primary"
                 />
+                
+                {showSearchDropdown && (searchQuery.trim().length > 1) && (
+                  <div className="absolute top-full mt-2 w-80 bg-popover border border-border shadow-lg rounded-xl overflow-hidden z-50 max-h-96 overflow-y-auto">
+                    {isSearching ? (
+                      <div className="p-4 text-center text-sm text-muted-foreground">Searching...</div>
+                    ) : searchResults && (searchResults.tasks.length > 0 || searchResults.expenses.length > 0) ? (
+                      <div className="py-2">
+                        {searchResults.tasks.length > 0 && (
+                          <div className="px-3 py-1">
+                            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Tasks</h4>
+                            {searchResults.tasks.map((task: any) => (
+                              <div key={task._id} className="p-2 hover:bg-secondary/50 rounded-lg cursor-pointer transition-colors mb-1">
+                                <p className="text-sm font-medium truncate">{task.title}</p>
+                                {task.due_date && <p className="text-xs text-muted-foreground truncate">{task.due_date.split('T')[0]}</p>}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {searchResults.tasks.length > 0 && searchResults.expenses.length > 0 && (
+                          <div className="h-px bg-border my-2" />
+                        )}
+
+                        {searchResults.expenses.length > 0 && (
+                          <div className="px-3 py-1">
+                            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Expenses</h4>
+                            {searchResults.expenses.map((exp: any) => (
+                              <div key={exp._id} className="p-2 hover:bg-secondary/50 rounded-lg cursor-pointer transition-colors mb-1 flex justify-between items-center">
+                                <div className="min-w-0 flex-1 pr-2">
+                                  <p className="text-sm font-medium truncate">{exp.name || exp.title}</p>
+                                  {exp.due_date && <p className="text-xs text-muted-foreground truncate">{exp.due_date.split('T')[0]}</p>}
+                                </div>
+                                <span className="text-xs font-bold shrink-0">₹{exp.amount}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="p-4 text-center text-sm text-muted-foreground">No results found for &quot;{searchQuery}&quot;</div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary" />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="relative"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                title="Toggle Theme"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
               </Button>
             </div>
           </header>

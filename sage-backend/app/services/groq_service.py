@@ -65,12 +65,13 @@ def extract_structured_data(user_input):
     today = datetime.now(timezone.utc).strftime("%B %d, %Y")
     system_prompt = f"""You are a personal assistant AI. The user will give you a natural language input.
 Extract structured data and return ONLY valid JSON with no explanation.
-Identify what type of action the user wants: 'add_task', 'add_expense', 'add_reminder', 'query', or 'other'.
+Identify what type of action the user wants: 'add_task', 'add_expense', 'add_reminder', 'query', 'reschedule', or 'other'.
 
 For add_task return: {{ "action": "add_task", "title": "", "due_date": "", "due_time": "", "note": "", "category": "calendar|reminder" }}
 For add_expense return: {{ "action": "add_expense", "name": "", "amount": 0, "due_date": "", "category": "subscription|bill|emi|utility", "recurring": false, "recurrence_interval": "monthly|yearly|null", "notes": "" }}
 For add_reminder return: {{ "action": "add_reminder", "title": "", "due_date": "", "note": "" }}
 For query return: {{ "action": "query", "query_type": "expenses|tasks|all" }}
+For reschedule return: {{ "action": "reschedule", "target_name": "", "new_date": "", "new_time": "" }}
 
 Today's date is {today}. Parse relative dates like 'tomorrow', 'next Tuesday', 'in 2 months'.
 Return only the JSON object, nothing else."""
@@ -114,6 +115,11 @@ def generate_response_message(action, extracted_data, success):
 
     if action == "query":  # Fixed: was "action" which never matched
         return "Here is the information you requested. 📊"
+
+    if action == "reschedule":
+        target = extracted_data.get("target_name", "your event")
+        date = extracted_data.get("new_date", "the new date")
+        return f"Done! I've rescheduled '{target}' to {date}. 📅"
 
     return "I've processed your request. 👍"
 

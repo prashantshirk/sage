@@ -119,7 +119,16 @@ def update_me():
     db = get_db()
     user_id = get_current_user_id()
     data = request.get_json(silent=True) or {}
-    
+
+    # Handle Telegram unlink as a special early-return action
+    if data.get("unlink_telegram"):
+        from bson import ObjectId
+        db.users.update_one(
+            {"_id": ObjectId(user_id)},
+            {"$unset": {"telegram_chat_id": ""}}
+        )
+        return jsonify({"success": True, "message": "Telegram unlinked"})
+
     update_data = {}
     if "notifications" in data:
         update_data["notifications"] = data["notifications"]

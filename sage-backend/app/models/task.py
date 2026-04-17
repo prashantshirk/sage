@@ -90,3 +90,29 @@ def mark_overdue_tasks(db, user_id):
     }
     result = db.tasks.update_many(query, {"$set": {"status": "overdue"}})
     return result.modified_count
+
+def update_task(db, task_id, data):
+    """
+    Updates a task by ID.
+    """
+    result = db.tasks.update_one(
+        {"_id": ObjectId(task_id)},
+        {"$set": data}
+    )
+    if result.modified_count > 0:
+        return serialize_document(db.tasks.find_one({"_id": ObjectId(task_id)}))
+    return None
+
+def find_task_by_title_regex(db, user_id, search_text):
+    """
+    Finds the earliest pending task matching a title using regex.
+    """
+    import re
+    # We want to match parts of the title, so we don't need exact match
+    query = {
+        "user_id": str(user_id),
+        "status": "pending",
+        "title": {"$regex": re.escape(search_text), "$options": "i"}
+    }
+    task = db.tasks.find_one(query, sort=[("due_date", 1)])
+    return serialize_document(task) if task else None

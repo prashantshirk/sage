@@ -68,3 +68,32 @@ def update_google_tokens(db, user_id, access_token, refresh_token, expiry):
     
     result = db.users.update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
     return result.modified_count > 0
+
+
+def link_telegram(db, user_id, telegram_chat_id):
+    """
+    Links a Telegram chat ID to a user account.
+    """
+    from datetime import datetime
+    db.users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$set": {"telegram_chat_id": str(telegram_chat_id), "updated_at": datetime.utcnow()}}
+    )
+
+
+def get_user_by_telegram_chat_id(db, chat_id):
+    """
+    Returns a serialized user document by their linked Telegram chat ID.
+    """
+    user = db.users.find_one({"telegram_chat_id": str(chat_id)})
+    return serialize_document(user) if user else None
+
+
+def unlink_telegram(db, user_id):
+    """
+    Removes the Telegram chat ID link from a user account.
+    """
+    db.users.update_one(
+        {"_id": ObjectId(user_id)},
+        {"$unset": {"telegram_chat_id": ""}}
+    )

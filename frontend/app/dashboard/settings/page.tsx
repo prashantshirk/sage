@@ -28,6 +28,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { getCurrentUser, updateCurrentUser, logout } from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 const settingsSections = [
   { id: "profile", label: "Profile", icon: User },
@@ -43,11 +44,11 @@ const themeOptions = [
 ];
 
 const accentColors = [
-  { id: "amber", label: "Amber", color: "bg-primary" },
-  { id: "blue", label: "Blue", color: "bg-blue-500" },
-  { id: "green", label: "Green", color: "bg-green-500" },
-  { id: "purple", label: "Purple", color: "bg-purple-500" },
-  { id: "red", label: "Red", color: "bg-red-500" },
+  { id: "amber",  label: "Amber",  hex: "#d97706" },
+  { id: "blue",   label: "Blue",   hex: "#3b82f6" },
+  { id: "green",  label: "Green",  hex: "#22c55e" },
+  { id: "purple", label: "Purple", hex: "#a855f7" },
+  { id: "red",    label: "Red",    hex: "#ef4444" },
 ];
 
 export default function SettingsPage() {
@@ -57,8 +58,8 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const { theme, setTheme } = useTheme();
 
-  const [selectedTheme, setSelectedTheme] = useState("dark");
   const [selectedAccent, setSelectedAccent] = useState("amber");
   const [notifications, setNotifications] = useState({
     email: true,
@@ -68,6 +69,13 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
+    // Restore saved accent from localStorage on mount
+    const savedAccent = localStorage.getItem('sage-accent') || 'amber';
+    setSelectedAccent(savedAccent);
+    if (savedAccent !== 'amber') {
+      document.documentElement.setAttribute('data-accent', savedAccent);
+    }
+
     async function loadUser() {
       try {
         const data = await getCurrentUser();
@@ -76,8 +84,16 @@ export default function SettingsPage() {
           setNotifications(prev => ({ ...prev, ...data.notifications }));
         }
         if (data.appearance) {
-          if (data.appearance.theme) setSelectedTheme(data.appearance.theme);
-          if (data.appearance.accent) setSelectedAccent(data.appearance.accent);
+          if (data.appearance.theme) setTheme(data.appearance.theme);
+          if (data.appearance.accent) {
+            setSelectedAccent(data.appearance.accent);
+            localStorage.setItem('sage-accent', data.appearance.accent);
+            if (data.appearance.accent === 'amber') {
+              document.documentElement.removeAttribute('data-accent');
+            } else {
+              document.documentElement.setAttribute('data-accent', data.appearance.accent);
+            }
+          }
         }
       } catch (e) {
         toast.error("Failed to load user settings");
@@ -108,11 +124,17 @@ export default function SettingsPage() {
 
   const handleAppearanceChange = (type: 'theme' | 'accent', value: string) => {
     if (type === 'theme') {
-      setSelectedTheme(value);
+      setTheme(value);
       saveSettings({ appearance: { theme: value, accent: selectedAccent } });
     } else {
       setSelectedAccent(value);
-      saveSettings({ appearance: { theme: selectedTheme, accent: value } });
+      localStorage.setItem('sage-accent', value);
+      if (value === 'amber') {
+        document.documentElement.removeAttribute('data-accent');
+      } else {
+        document.documentElement.setAttribute('data-accent', value);
+      }
+      saveSettings({ appearance: { theme: theme, accent: value } });
     }
   };
 
@@ -319,22 +341,22 @@ export default function SettingsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-3 gap-4">
-                    {themeOptions.map((theme) => (
+                    {themeOptions.map((themeOption) => (
                       <button
-                        key={theme.id}
-                        onClick={() => handleAppearanceChange("theme", theme.id)}
+                        key={themeOption.id}
+                        onClick={() => handleAppearanceChange("theme", themeOption.id)}
                         className={cn(
                           "flex flex-col items-center gap-3 p-4 rounded-lg border transition-all",
-                          selectedTheme === theme.id
+                          theme === themeOption.id
                             ? "border-primary bg-primary/10 shadow-sm"
                             : "border-border hover:border-primary/50"
                         )}
                       >
                         <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
-                          <theme.icon className={cn("w-6 h-6", selectedTheme === theme.id ? "text-primary" : "text-foreground")} />
+                          <themeOption.icon className={cn("w-6 h-6", theme === themeOption.id ? "text-primary" : "text-foreground")} />
                         </div>
-                        <span className="text-sm font-medium text-foreground">{theme.label}</span>
-                        {selectedTheme === theme.id && (
+                        <span className="text-sm font-medium text-foreground">{themeOption.label}</span>
+                        {theme === themeOption.id && (
                           <Check className="w-4 h-4 text-primary" />
                         )}
                       </button>
@@ -349,21 +371,21 @@ export default function SettingsPage() {
                   <CardDescription>Choose your highlight color.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-4 p-2">
+                  <div className="flex gap-4 p-2 flex-wrap">
                     {accentColors.map((accent) => (
                       <button
                         key={accent.id}
                         onClick={() => handleAppearanceChange("accent", accent.id)}
                         className={cn(
                           "w-12 h-12 rounded-full transition-all flex items-center justify-center shadow-sm",
-                          accent.color,
                           selectedAccent === accent.id
                             ? "ring-4 ring-offset-4 ring-offset-background ring-foreground scale-110"
                             : "hover:scale-110 opacity-80 hover:opacity-100"
                         )}
+                        style={{ backgroundColor: accent.hex }}
                         title={accent.label}
                       >
-                        {selectedAccent === accent.id && <Check className="w-5 h-5 text-white" />}
+                        {selectedAccent === accent.id && <Check className="w-5 h-5 text-white drop-shadow" />}
                       </button>
                     ))}
                   </div>
