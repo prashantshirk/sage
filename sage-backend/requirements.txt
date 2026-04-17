@@ -1,0 +1,13 @@
+flask
+flask-cors
+pymongo
+python-dotenv
+groq
+google-auth
+google-auth-oauthlib
+google-api-python-client
+PyJWT
+requests
+google-generativeai
+python-dateutil
+certifi

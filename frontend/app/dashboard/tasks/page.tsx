@@ -1,106 +1,107 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2,
   Circle,
-  Plus,
   Calendar,
-  Clock,
   Flag,
-  Filter,
-  Search,
-  Bell,
-  Repeat,
-  ChevronRight,
-  Star,
-  Trash2,
+  Flame,
+  CheckSquare,
+  Award,
+  Loader2,
+  Clock
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-
-interface Task {
-  id: number;
-  title: string;
-  completed: boolean;
-  priority: "high" | "medium" | "low";
-  dueDate: string;
-  category: string;
-  starred: boolean;
-  recurring?: boolean;
-}
-
-const initialTasks: Task[] = [
-  { id: 1, title: "Review Q4 budget proposal", completed: false, priority: "high", dueDate: "Today", category: "Work", starred: true },
-  { id: 2, title: "Send weekly report to team", completed: false, priority: "medium", dueDate: "Today", category: "Work", starred: false },
-  { id: 3, title: "Schedule dentist appointment", completed: false, priority: "low", dueDate: "Tomorrow", category: "Personal", starred: false },
-  { id: 4, title: "Prepare presentation slides", completed: false, priority: "high", dueDate: "Tomorrow", category: "Work", starred: true },
-  { id: 5, title: "Review pull requests", completed: true, priority: "medium", dueDate: "Today", category: "Work", starred: false },
-  { id: 6, title: "Update project documentation", completed: true, priority: "low", dueDate: "Yesterday", category: "Work", starred: false },
-  { id: 7, title: "Gym workout", completed: false, priority: "medium", dueDate: "Today", category: "Health", starred: false, recurring: true },
-  { id: 8, title: "Read 30 minutes", completed: false, priority: "low", dueDate: "Today", category: "Personal", starred: false, recurring: true },
-];
-
-const reminders = [
-  { id: 1, title: "Team standup in 30 minutes", time: "9:00 AM", type: "meeting" },
-  { id: 2, title: "Submit expense report", time: "5:00 PM", type: "deadline" },
-  { id: 3, title: "Call mom", time: "7:00 PM", type: "personal" },
-  { id: 4, title: "Take medication", time: "9:00 PM", type: "health", recurring: true },
-];
-
-const categories = ["All", "Work", "Personal", "Health"];
-const priorities = ["All", "High", "Medium", "Low"];
+import { toast } from "sonner";
+import { getTodaysTasks, getUpcomingTasks, updateTaskStatus, getStreak, getStreakHistory, submitDailyProgress } from "@/lib/api";
 
 export default function TasksPage() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedPriority, setSelectedPriority] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [activeTab, setActiveTab] = useState<"today" | "upcoming">("today");
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  
+  const [todaysTasks, setTodaysTasks] = useState<any[]>([]);
+  const [upcomingTasks, setUpcomingTasks] = useState<any>({ tomorrow: [], this_week: [], next_week: [] });
+  const [streakData, setStreakData] = useState<any>({ current_streak: 0, best_streak: 0 });
+  const [streakHistory, setStreakHistory] = useState<any[]>([]);
 
-  const toggleTask = (id: number) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+  const fetchAllData = async () => {
+    try {
+      const [todayRes, upcomingRes, streakRes, historyRes] = await Promise.all([
+        getTodaysTasks().catch(() => []),
+        getUpcomingTasks().catch(() => ({ tomorrow: [], this_week: [], next_week: [] })),
+        getStreak().catch(() => ({ current_streak: 0, best_streak: 0 })),
+        getStreakHistory().catch(() => [])
+      ]);
+      setTodaysTasks(Array.isArray(todayRes) ? todayRes : []);
+      setUpcomingTasks(upcomingRes);
+      setStreakData(streakRes);
+      setStreakHistory(Array.isArray(historyRes) ? historyRes : []);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const toggleStar = (id: number) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, starred: !task.starred } : task
-    ));
+  useEffect(() => {
+    fetchAllData();
+  }, []);
+
+  const handleToggleTask = async (taskId: string, currentStatus: string) => {
+    const newStatus = currentStatus === "completed" ? "pending" : "completed";
+    
+    // Optimistic update
+    setTodaysTasks(prev => 
+      prev.map(t => t._id === taskId ? { ...t, status: newStatus } : t)
+    );
+    
+    try {
+      await updateTaskStatus(taskId, newStatus);
+    } catch (e) {
+      // Revert on error
+      setTodaysTasks(prev => 
+        prev.map(t => t._id === taskId ? { ...t, status: currentStatus } : t)
+      );
+      toast.error("Failed to update task status.");
+    }
   };
 
-  const deleteTask = (id: number) => {
-    setTasks(tasks.filter(task => task.id !== id));
+  const handleProgressSubmit = async () => {
+    setSubmitting(true);
+    const completedCount = todaysTasks.filter(t => t.status === "completed").length;
+    try {
+      const res = await submitDailyProgress(todaysTasks.length, completedCount);
+      toast.success(`Progress submitted! Streak: ${res.current_streak} 🔥`);
+      
+      // Refresh streak data
+      const [streakRes, historyRes] = await Promise.all([
+        getStreak().catch(() => streakData),
+        getStreakHistory().catch(() => streakHistory)
+      ]);
+      setStreakData(streakRes);
+      setStreakHistory(Array.isArray(historyRes) ? historyRes : []);
+    } catch (e: any) {
+      toast.error(e.message || "Failed to submit progress");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const addTask = () => {
-    if (!newTaskTitle.trim()) return;
-    const newTask: Task = {
-      id: Date.now(),
-      title: newTaskTitle,
-      completed: false,
-      priority: "medium",
-      dueDate: "Today",
-      category: "Work",
-      starred: false,
-    };
-    setTasks([newTask, ...tasks]);
-    setNewTaskTitle("");
-  };
+  const completedCount = todaysTasks.filter(t => t.status === "completed").length;
+  const totalCount = todaysTasks.length;
+  const progressPercent = totalCount === 0 ? 0 : (completedCount / totalCount) * 100;
 
-  const filteredTasks = tasks.filter(task => {
-    const matchesCategory = selectedCategory === "All" || task.category === selectedCategory;
-    const matchesPriority = selectedPriority === "All" || task.priority === selectedPriority.toLowerCase();
-    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesPriority && matchesSearch;
+  // Ensure history is a 35 day array
+  const heatmapCells = Array(35).fill(null).map((_, i) => {
+    if (i < streakHistory.length) return streakHistory[i];
+    return { completed: false, date: "" };
   });
-
-  const completedCount = tasks.filter(t => t.completed).length;
-  const totalCount = tasks.length;
 
   return (
     <div className="space-y-6">
@@ -113,220 +114,225 @@ export default function TasksPage() {
       >
         <div>
           <h1 className="text-2xl font-bold text-foreground">Tasks & Reminders</h1>
-          <p className="text-muted-foreground">{completedCount} of {totalCount} tasks completed today.</p>
+          <p className="text-muted-foreground">Manage your daily priorities and long-term goals.</p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" className="border-border">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Plus className="w-4 h-4 mr-2" />
-            New Task
-          </Button>
+        <div className="flex bg-secondary p-1 rounded-lg">
+          <button 
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTab === 'today' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
+            onClick={() => setActiveTab('today')}
+          >
+            Today
+          </button>
+          <button 
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${activeTab === 'upcoming' ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground'}`}
+            onClick={() => setActiveTab('upcoming')}
+          >
+            Upcoming
+          </button>
         </div>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Tasks List */}
+        {/* Main Content Area */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="lg:col-span-2"
+          className="lg:col-span-2 space-y-6"
         >
-          <Card className="bg-card border-border">
-            <CardHeader className="pb-3">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search tasks..."
-                    className="pl-9 bg-secondary border-border"
-                  />
+          {activeTab === "today" && (
+            <Card className="bg-card border-border">
+              <CardHeader className="pb-3 border-b border-border/50">
+                <div className="flex justify-between items-center mb-2">
+                  <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                    <CheckSquare className="w-5 h-5 text-primary" />
+                    Today&apos;s Tasks
+                  </CardTitle>
+                  <span className="text-sm font-medium text-muted-foreground">{completedCount} / {totalCount} Completed</span>
                 </div>
-                <div className="flex gap-2">
-                  <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="px-3 py-2 text-sm bg-secondary border border-border rounded-lg text-foreground"
+                <Progress value={progressPercent} className="h-2" />
+              </CardHeader>
+              <CardContent className="pt-4">
+                {loading ? (
+                  <div className="space-y-3">
+                    {[1, 2, 3].map(i => <div key={i} className="h-14 bg-secondary animate-pulse rounded-lg" />)}
+                  </div>
+                ) : todaysTasks.length === 0 ? (
+                  <div className="py-8 text-center text-muted-foreground">
+                    <CheckCircle2 className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                    <p>No tasks scheduled for today.</p>
+                    <p className="text-sm">Use &quot;Ask Sage&quot; to add new tasks.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <AnimatePresence>
+                      {todaysTasks.map((task, index) => (
+                        <motion.div
+                          key={task._id}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.03 }}
+                          className="group flex items-center gap-3 p-3 rounded-lg border border-border/50 bg-secondary/20 hover:bg-secondary/60 transition-colors"
+                        >
+                          <button onClick={() => handleToggleTask(task._id, task.status)} className="flex-shrink-0 cursor-pointer">
+                            {task.status === "completed" ? (
+                              <CheckCircle2 className="w-5 h-5 text-primary" />
+                            ) : (
+                              <Circle className={`w-5 h-5 transition-colors ${task.status === 'overdue' ? 'text-destructive' : 'text-muted-foreground hover:text-primary'}`} />
+                            )}
+                          </button>
+                          <div className="flex-1 min-w-0">
+                            <p className={cn(
+                              "text-sm font-medium truncate transition-colors",
+                              task.status === "completed" ? "text-muted-foreground line-through" : "text-foreground"
+                            )}>
+                              {task.title}
+                            </p>
+                            <div className="flex items-center gap-2 mt-1">
+                              {task.due_time && (
+                                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                                  <Clock className="w-3 h-3" />
+                                  {task.due_time}
+                                </span>
+                              )}
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-muted-foreground uppercase font-semibold">
+                                {task.category || 'reminder'}
+                              </span>
+                            </div>
+                          </div>
+                          {task.status === "overdue" && (
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-destructive/20 text-destructive flex-shrink-0">
+                              Overdue
+                            </span>
+                          )}
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                )}
+                
+                {!loading && todaysTasks.length > 0 && (
+                  <Button 
+                    className="w-full mt-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0 shadow-md transition-all hover:scale-[1.02]" 
+                    onClick={handleProgressSubmit}
+                    disabled={submitting || completedCount === 0}
                   >
-                    {categories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                  <select
-                    value={selectedPriority}
-                    onChange={(e) => setSelectedPriority(e.target.value)}
-                    className="px-3 py-2 text-sm bg-secondary border border-border rounded-lg text-foreground"
-                  >
-                    {priorities.map(pri => (
-                      <option key={pri} value={pri}>{pri}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              {/* Add Task Input */}
-              <div className="flex items-center gap-3 p-3 mb-4 rounded-lg border border-dashed border-border hover:border-primary/50 transition-colors">
-                <Plus className="w-5 h-5 text-muted-foreground" />
-                <Input
-                  value={newTaskTitle}
-                  onChange={(e) => setNewTaskTitle(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && addTask()}
-                  placeholder="Add a new task..."
-                  className="border-0 bg-transparent p-0 focus-visible:ring-0 text-foreground placeholder:text-muted-foreground"
-                />
-                {newTaskTitle && (
-                  <Button size="sm" onClick={addTask} className="bg-primary text-primary-foreground">
-                    Add
+                    {submitting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Flame className="w-4 h-4 mr-2" />}
+                    Submit Daily Progress
                   </Button>
                 )}
-              </div>
+              </CardContent>
+            </Card>
+          )}
 
-              {/* Tasks */}
-              <div className="space-y-2">
-                <AnimatePresence>
-                  {filteredTasks.map((task, index) => (
-                    <motion.div
-                      key={task.id}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.2, delay: index * 0.03 }}
-                      className="group flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/50 transition-colors"
-                    >
-                      <button onClick={() => toggleTask(task.id)} className="flex-shrink-0">
-                        {task.completed ? (
-                          <CheckCircle2 className="w-5 h-5 text-primary" />
-                        ) : (
-                          <Circle className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
-                        )}
-                      </button>
-                      <div className="flex-1 min-w-0">
-                        <p className={cn(
-                          "text-sm font-medium truncate",
-                          task.completed ? "text-muted-foreground line-through" : "text-foreground"
-                        )}>
-                          {task.title}
-                        </p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-muted-foreground flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            {task.dueDate}
-                          </span>
-                          <span className="text-xs px-1.5 py-0.5 rounded bg-secondary text-muted-foreground">
-                            {task.category}
-                          </span>
-                          {task.recurring && (
-                            <Repeat className="w-3 h-3 text-muted-foreground" />
-                          )}
+          {activeTab === "upcoming" && (
+            <Card className="bg-card border-border">
+              <CardHeader className="pb-3 border-b border-border/50">
+                <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-primary" />
+                  Upcoming Tasks
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-4 space-y-6">
+                {loading ? (
+                  <div className="space-y-6">
+                    {[1, 2].map(i => (
+                      <div key={i} className="space-y-3">
+                        <div className="h-5 w-24 bg-secondary animate-pulse rounded" />
+                        <div className="h-12 bg-secondary animate-pulse rounded-lg" />
+                        <div className="h-12 bg-secondary animate-pulse rounded-lg" />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <>
+                    {Object.entries(upcomingTasks).map(([groupKey, groupTasks]: [string, any]) => {
+                      if (!groupTasks || groupTasks.length === 0) return null;
+                      
+                      const groupTitle = groupKey.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase());
+                      
+                      return (
+                        <div key={groupKey} className="space-y-3">
+                          <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">{groupTitle}</h3>
+                          <div className="space-y-2">
+                            {groupTasks.map((task: any) => (
+                              <div key={task._id} className="flex items-center justify-between p-3 rounded-lg border border-border/50 bg-secondary/20">
+                                <div>
+                                  <p className="text-sm font-medium text-foreground">{task.title}</p>
+                                  <p className="text-xs text-muted-foreground mt-0.5">{task.due_date} {task.due_time && `• ${task.due_time}`}</p>
+                                </div>
+                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-secondary text-muted-foreground uppercase font-semibold">
+                                  {task.category || 'reminder'}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
+                      );
+                    })}
+                    {(!upcomingTasks.tomorrow?.length && !upcomingTasks.this_week?.length && !upcomingTasks.next_week?.length) && (
+                      <div className="py-8 text-center text-muted-foreground">
+                        <Calendar className="w-12 h-12 mx-auto mb-3 opacity-20" />
+                        <p>No upcoming tasks found.</p>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className={cn(
-                          "text-xs px-2 py-0.5 rounded-full",
-                          task.priority === "high" && "bg-destructive/20 text-destructive",
-                          task.priority === "medium" && "bg-primary/20 text-primary",
-                          task.priority === "low" && "bg-muted text-muted-foreground"
-                        )}>
-                          {task.priority}
-                        </span>
-                        <button
-                          onClick={() => toggleStar(task.id)}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <Star className={cn(
-                            "w-4 h-4",
-                            task.starred ? "text-primary fill-primary" : "text-muted-foreground"
-                          )} />
-                        </button>
-                        <button
-                          onClick={() => deleteTask(task.id)}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          <Trash2 className="w-4 h-4 text-muted-foreground hover:text-destructive" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </CardContent>
-          </Card>
+                    )}
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </motion.div>
 
-        {/* Reminders Sidebar */}
+        {/* Gamification Sidebar */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="space-y-6"
         >
-          {/* Today's Reminders */}
-          <Card className="bg-card border-border">
-            <CardHeader className="pb-3">
+          {/* Streak Card */}
+          <Card className="bg-card border-border overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-orange-500/5 z-0" />
+            <CardHeader className="pb-2 relative z-10">
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                <Bell className="w-5 h-5 text-primary" />
-                Today&apos;s Reminders
+                <Flame className="w-5 h-5 text-amber-500" />
+                Productivity Streak
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              {reminders.map((reminder, index) => (
-                <motion.div
-                  key={reminder.id}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors group cursor-pointer"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-4 h-4 text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground truncate">{reminder.title}</p>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-foreground">{reminder.time}</span>
-                      {reminder.recurring && <Repeat className="w-3 h-3 text-muted-foreground" />}
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                </motion.div>
-              ))}
-            </CardContent>
-          </Card>
+            <CardContent className="space-y-6 relative z-10">
+              <div className="flex items-center justify-between">
+                <div className="text-center">
+                  <p className="text-4xl font-extrabold text-foreground">{loading ? "-" : streakData?.current_streak || 0}</p>
+                  <p className="text-xs text-muted-foreground font-medium uppercase mt-1">Current Streak</p>
+                </div>
+                <div className="h-10 w-px bg-border" />
+                <div className="text-center">
+                  <p className="text-4xl font-extrabold text-foreground">{loading ? "-" : streakData?.best_streak || 0}</p>
+                  <p className="text-xs text-muted-foreground font-medium uppercase mt-1">Best Streak</p>
+                </div>
+              </div>
 
-          {/* Quick Stats */}
-          <Card className="bg-card border-border">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                <Flag className="w-5 h-5 text-primary" />
-                Quick Stats
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Completed Today</span>
-                <span className="text-sm font-medium text-foreground">{completedCount}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Pending</span>
-                <span className="text-sm font-medium text-foreground">{totalCount - completedCount}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">High Priority</span>
-                <span className="text-sm font-medium text-destructive">
-                  {tasks.filter(t => t.priority === "high" && !t.completed).length}
-                </span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Starred</span>
-                <span className="text-sm font-medium text-primary">
-                  {tasks.filter(t => t.starred).length}
-                </span>
+              {/* Heatmap Grid (35 days = 5 weeks) */}
+              <div className="pt-2 border-t border-border/50">
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase">Last 35 Days</p>
+                  <Award className="w-4 h-4 text-amber-500" />
+                </div>
+                {loading ? (
+                  <div className="grid grid-cols-7 gap-1">
+                    {Array(35).fill(0).map((_, i) => <div key={i} className="aspect-square bg-secondary rounded-sm animate-pulse" />)}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-7 gap-1">
+                    {heatmapCells.map((day, i) => (
+                      <div 
+                        key={i} 
+                        className={`aspect-square rounded-sm transition-colors ${day?.completed ? 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]' : 'bg-secondary'}`}
+                        title={day?.date ? new Date(day.date).toLocaleDateString() : 'No data'}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>

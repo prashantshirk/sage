@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
@@ -11,9 +12,13 @@ import {
   ArrowRight,
   Zap,
   Shield,
-  Globe
+  Globe,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getGoogleLoginUrl } from "@/lib/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const features = [
   {
@@ -57,6 +62,22 @@ const benefits = [
 ];
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const handleLogin = async () => {
+    setIsLoggingIn(true);
+    try {
+      const res = await getGoogleLoginUrl();
+      if (res.auth_url) {
+        window.location.href = res.auth_url;
+      }
+    } catch (e: any) {
+      toast.error(e.message || "Failed to start login");
+      setIsLoggingIn(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -74,11 +95,10 @@ export default function LandingPage() {
                 Dashboard
               </Button>
             </Link>
-            <Link href="/dashboard">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Get Started
-              </Button>
-            </Link>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={handleLogin} disabled={isLoggingIn}>
+              {isLoggingIn ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Get Started
+            </Button>
           </div>
         </div>
       </nav>
@@ -127,12 +147,11 @@ export default function LandingPage() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link href="/dashboard">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber-sm px-8">
-                Open Dashboard
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber-sm px-8" onClick={handleLogin} disabled={isLoggingIn}>
+              {isLoggingIn ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+              Open Dashboard
+              {!isLoggingIn && <ArrowRight className="w-4 h-4 ml-2" />}
+            </Button>
             <Button size="lg" variant="outline" className="border-border hover:bg-secondary">
               Watch Demo
             </Button>
@@ -215,12 +234,11 @@ export default function LandingPage() {
               <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto text-pretty">
                 Join thousands of users who have already simplified their daily workflow with Sage.
               </p>
-              <Link href="/dashboard">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber-sm px-10">
-                  Get Started Free
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 glow-amber-sm px-10" onClick={handleLogin} disabled={isLoggingIn}>
+                {isLoggingIn ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+                Get Started Free
+                {!isLoggingIn && <ArrowRight className="w-4 h-4 ml-2" />}
+              </Button>
             </div>
           </motion.div>
         </div>

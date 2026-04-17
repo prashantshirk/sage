@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   User,
@@ -17,6 +17,7 @@ import {
   LogOut,
   ChevronRight,
   Check,
+  Loader2
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { getCurrentUser, updateCurrentUser, logout } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const settingsSections = [
   { id: "profile", label: "Profile", icon: User },
@@ -47,7 +51,13 @@ const accentColors = [
 ];
 
 export default function SettingsPage() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState("profile");
+  
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [user, setUser] = useState<any>(null);
+
   const [selectedTheme, setSelectedTheme] = useState("dark");
   const [selectedAccent, setSelectedAccent] = useState("amber");
   const [notifications, setNotifications] = useState({
@@ -56,6 +66,72 @@ export default function SettingsPage() {
     reminders: true,
     marketing: false,
   });
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        const data = await getCurrentUser();
+        setUser(data);
+        if (data.notifications) {
+          setNotifications(prev => ({ ...prev, ...data.notifications }));
+        }
+        if (data.appearance) {
+          if (data.appearance.theme) setSelectedTheme(data.appearance.theme);
+          if (data.appearance.accent) setSelectedAccent(data.appearance.accent);
+        }
+      } catch (e) {
+        toast.error("Failed to load user settings");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadUser();
+  }, []);
+
+  const saveSettings = async (updates: any) => {
+    setSaving(true);
+    try {
+      await updateCurrentUser(updates);
+      toast.success("Settings saved successfully");
+    } catch (e) {
+      toast.error("Failed to save settings");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleNotificationChange = (key: string, value: boolean) => {
+    const newNotifs = { ...notifications, [key]: value };
+    setNotifications(newNotifs);
+    saveSettings({ notifications: newNotifs });
+  };
+
+  const handleAppearanceChange = (type: 'theme' | 'accent', value: string) => {
+    if (type === 'theme') {
+      setSelectedTheme(value);
+      saveSettings({ appearance: { theme: value, accent: selectedAccent } });
+    } else {
+      setSelectedAccent(value);
+      saveSettings({ appearance: { theme: selectedTheme, accent: value } });
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/");
+    } catch (e) {
+      toast.error("Logout failed");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-[60vh]">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -122,41 +198,28 @@ export default function SettingsPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-center gap-6">
-                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-primary">JD</span>
+                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+                      {user?.avatar ? (
+                        <img src={user.avatar} alt="Avatar" className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-2xl font-bold text-primary">{user?.name?.charAt(0) || "U"}</span>
+                      )}
                     </div>
                     <div>
-                      <Button variant="outline" className="border-border">
-                        Change Photo
-                      </Button>
-                      <p className="text-xs text-muted-foreground mt-2">JPG, PNG or GIF. Max 2MB.</p>
+                      <p className="text-sm font-medium text-foreground mb-1">{user?.name}</p>
+                      <p className="text-xs text-muted-foreground">Managed by Google OAuth</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" defaultValue="John" className="bg-secondary border-border" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" defaultValue="Doe" className="bg-secondary border-border" />
+                      <Label htmlFor="name">Full Name</Label>
+                      <Input id="name" defaultValue={user?.name || ""} disabled className="bg-secondary/50 border-border text-muted-foreground" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" defaultValue="john@example.com" className="bg-secondary border-border" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="timezone">Timezone</Label>
-                      <select className="w-full px-3 py-2 bg-secondary border border-border rounded-lg text-foreground text-sm">
-                        <option>Pacific Time (PT)</option>
-                        <option>Eastern Time (ET)</option>
-                        <option>Central European Time (CET)</option>
-                      </select>
+                      <Input id="email" type="email" defaultValue={user?.email || ""} disabled className="bg-secondary/50 border-border text-muted-foreground" />
                     </div>
                   </div>
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    Save Changes
-                  </Button>
                 </CardContent>
               </Card>
 
@@ -166,29 +229,17 @@ export default function SettingsPage() {
                   <CardDescription>Manage your connected services and integrations.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50 border border-border/50">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center">
-                        <Globe className="w-5 h-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center shadow-sm">
+                        <Globe className="w-5 h-5 text-emerald-500" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-foreground">Google</p>
-                        <p className="text-xs text-muted-foreground">Calendar, Drive, Gmail</p>
+                        <p className="text-sm font-medium text-foreground">Google Workspace</p>
+                        <p className="text-xs text-muted-foreground">Calendar & Gmail access connected</p>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" className="border-border">Connected</Button>
-                  </div>
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-background flex items-center justify-center">
-                        <CreditCard className="w-5 h-5 text-muted-foreground" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-foreground">Bank Account</p>
-                        <p className="text-xs text-muted-foreground">Plaid Integration</p>
-                      </div>
-                    </div>
-                    <Button variant="outline" size="sm" className="border-border">Connect</Button>
+                    <Button variant="outline" size="sm" className="border-border text-emerald-500" disabled>Connected</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -199,61 +250,53 @@ export default function SettingsPage() {
           {activeSection === "notifications" && (
             <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-lg">Notification Preferences</CardTitle>
-                <CardDescription>Choose how you want to be notified.</CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle className="text-lg">Notification Preferences</CardTitle>
+                    <CardDescription>Choose how you want to be notified by Sage.</CardDescription>
+                  </div>
+                  {saving && <Loader2 className="w-4 h-4 animate-spin text-primary" />}
+                </div>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary/20 transition-colors">
                     <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-muted-foreground" />
+                      <Mail className="w-5 h-5 text-primary" />
                       <div>
-                        <p className="text-sm font-medium text-foreground">Email Notifications</p>
-                        <p className="text-xs text-muted-foreground">Receive updates via email</p>
+                        <p className="text-sm font-medium text-foreground">Daily Briefing Email</p>
+                        <p className="text-xs text-muted-foreground">Receive your morning summary via email</p>
                       </div>
                     </div>
                     <Switch
                       checked={notifications.email}
-                      onCheckedChange={(checked) => setNotifications({ ...notifications, email: checked })}
+                      onCheckedChange={(checked) => handleNotificationChange("email", checked)}
                     />
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary/20 transition-colors">
                     <div className="flex items-center gap-3">
-                      <Smartphone className="w-5 h-5 text-muted-foreground" />
+                      <Smartphone className="w-5 h-5 text-primary" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Push Notifications</p>
-                        <p className="text-xs text-muted-foreground">Receive push notifications on mobile</p>
+                        <p className="text-xs text-muted-foreground">Receive real-time alerts</p>
                       </div>
                     </div>
                     <Switch
                       checked={notifications.push}
-                      onCheckedChange={(checked) => setNotifications({ ...notifications, push: checked })}
+                      onCheckedChange={(checked) => handleNotificationChange("push", checked)}
                     />
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-2 rounded-lg hover:bg-secondary/20 transition-colors">
                     <div className="flex items-center gap-3">
-                      <Bell className="w-5 h-5 text-muted-foreground" />
+                      <Bell className="w-5 h-5 text-primary" />
                       <div>
-                        <p className="text-sm font-medium text-foreground">Task Reminders</p>
-                        <p className="text-xs text-muted-foreground">Get reminded about upcoming tasks</p>
+                        <p className="text-sm font-medium text-foreground">Task & Bill Reminders</p>
+                        <p className="text-xs text-muted-foreground">Get reminded before due dates</p>
                       </div>
                     </div>
                     <Switch
                       checked={notifications.reminders}
-                      onCheckedChange={(checked) => setNotifications({ ...notifications, reminders: checked })}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium text-foreground">Marketing Emails</p>
-                        <p className="text-xs text-muted-foreground">Receive tips and product updates</p>
-                      </div>
-                    </div>
-                    <Switch
-                      checked={notifications.marketing}
-                      onCheckedChange={(checked) => setNotifications({ ...notifications, marketing: checked })}
+                      onCheckedChange={(checked) => handleNotificationChange("reminders", checked)}
                     />
                   </div>
                 </div>
@@ -266,24 +309,29 @@ export default function SettingsPage() {
             <>
               <Card className="bg-card border-border">
                 <CardHeader>
-                  <CardTitle className="text-lg">Theme</CardTitle>
-                  <CardDescription>Select your preferred color theme.</CardDescription>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="text-lg">Theme</CardTitle>
+                      <CardDescription>Select your preferred visual mode.</CardDescription>
+                    </div>
+                    {saving && <Loader2 className="w-4 h-4 animate-spin text-primary" />}
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-3 gap-4">
                     {themeOptions.map((theme) => (
                       <button
                         key={theme.id}
-                        onClick={() => setSelectedTheme(theme.id)}
+                        onClick={() => handleAppearanceChange("theme", theme.id)}
                         className={cn(
                           "flex flex-col items-center gap-3 p-4 rounded-lg border transition-all",
                           selectedTheme === theme.id
-                            ? "border-primary bg-primary/10"
+                            ? "border-primary bg-primary/10 shadow-sm"
                             : "border-border hover:border-primary/50"
                         )}
                       >
                         <div className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center">
-                          <theme.icon className="w-6 h-6 text-foreground" />
+                          <theme.icon className={cn("w-6 h-6", selectedTheme === theme.id ? "text-primary" : "text-foreground")} />
                         </div>
                         <span className="text-sm font-medium text-foreground">{theme.label}</span>
                         {selectedTheme === theme.id && (
@@ -298,23 +346,25 @@ export default function SettingsPage() {
               <Card className="bg-card border-border">
                 <CardHeader>
                   <CardTitle className="text-lg">Accent Color</CardTitle>
-                  <CardDescription>Choose your accent color for highlights and buttons.</CardDescription>
+                  <CardDescription>Choose your highlight color.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex gap-3">
+                  <div className="flex gap-4 p-2">
                     {accentColors.map((accent) => (
                       <button
                         key={accent.id}
-                        onClick={() => setSelectedAccent(accent.id)}
+                        onClick={() => handleAppearanceChange("accent", accent.id)}
                         className={cn(
-                          "w-10 h-10 rounded-full transition-all",
+                          "w-12 h-12 rounded-full transition-all flex items-center justify-center shadow-sm",
                           accent.color,
                           selectedAccent === accent.id
-                            ? "ring-2 ring-offset-2 ring-offset-background ring-foreground"
-                            : "hover:scale-110"
+                            ? "ring-4 ring-offset-4 ring-offset-background ring-foreground scale-110"
+                            : "hover:scale-110 opacity-80 hover:opacity-100"
                         )}
                         title={accent.label}
-                      />
+                      >
+                        {selectedAccent === accent.id && <Check className="w-5 h-5 text-white" />}
+                      </button>
                     ))}
                   </div>
                 </CardContent>
@@ -325,47 +375,33 @@ export default function SettingsPage() {
           {/* Privacy Section */}
           {activeSection === "privacy" && (
             <>
-              <Card className="bg-card border-border">
-                <CardHeader>
-                  <CardTitle className="text-lg">Security</CardTitle>
-                  <CardDescription>Manage your password and security settings.</CardDescription>
+              <Card className="bg-card border-border border-destructive/20 overflow-hidden">
+                <div className="absolute inset-0 bg-destructive/5 pointer-events-none" />
+                <CardHeader className="relative z-10">
+                  <CardTitle className="text-lg text-destructive flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    Account Actions
+                  </CardTitle>
+                  <CardDescription>Manage your session or permanently remove data.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50">
+                <CardContent className="space-y-4 relative z-10">
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50 border border-border/50">
                     <div className="flex items-center gap-3">
-                      <Key className="w-5 h-5 text-muted-foreground" />
+                      <LogOut className="w-5 h-5 text-muted-foreground" />
                       <div>
-                        <p className="text-sm font-medium text-foreground">Password</p>
-                        <p className="text-xs text-muted-foreground">Last changed 30 days ago</p>
+                        <p className="text-sm font-medium text-foreground">Sign Out</p>
+                        <p className="text-xs text-muted-foreground">End your current session on this device</p>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" className="border-border">Change</Button>
+                    <Button variant="outline" size="sm" onClick={handleLogout}>Log Out</Button>
                   </div>
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-secondary/50">
-                    <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm font-medium text-foreground">Two-Factor Authentication</p>
-                        <p className="text-xs text-muted-foreground">Add an extra layer of security</p>
-                      </div>
-                    </div>
-                    <Button variant="outline" size="sm" className="border-border">Enable</Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card border-border border-destructive/50">
-                <CardHeader>
-                  <CardTitle className="text-lg text-destructive">Danger Zone</CardTitle>
-                  <CardDescription>Irreversible actions for your account.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-4 rounded-lg bg-destructive/10">
+                  
+                  <div className="flex items-center justify-between p-4 rounded-lg bg-destructive/10 border border-destructive/20 mt-4">
                     <div className="flex items-center gap-3">
                       <LogOut className="w-5 h-5 text-destructive" />
                       <div>
                         <p className="text-sm font-medium text-foreground">Delete Account</p>
-                        <p className="text-xs text-muted-foreground">Permanently delete your account and data</p>
+                        <p className="text-xs text-muted-foreground text-destructive/80">Permanently delete your account and all data</p>
                       </div>
                     </div>
                     <Button variant="destructive" size="sm">Delete</Button>
