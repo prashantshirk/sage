@@ -1,6 +1,62 @@
 from flask import current_app
 import google.generativeai as genai
 from datetime import datetime, timezone
+import base64
+import json
+import time
+
+# Primary model for audio/image extraction and briefings
+PRIMARY_MODEL = "gemini-3.1-flash-lite-preview"
+# Fallback model used when the primary doesn't respond within the timeout
+FALLBACK_MODEL = "gemini-2.5-flash-lite"
+
+# Seconds to wait before retrying with the fallback model
+FALLBACK_WAIT_SECONDS = 3
+
+
+def _generate_with_fallback(content, purpose, primary_model=PRIMARY_MODEL,
+                             fallback_model=FALLBACK_MODEL,
+                             generation_config=None, timeout=90):
+    """
+    Try `primary_model` first. If it raises any exception (timeout, quota,
+    API error, etc.) wait FALLBACK_WAIT_SECONDS then retry with `fallback_model`.
+    Returns the raw response object, or raises if the fallback also fails.
+    """
+    request_options = {"timeout": timeout}
+
+    def _call(model_name, label=""):
+        tag = f" ({label})" if label else ""
+        print(
+            f"[{datetime.now()}] Pinging Model: {model_name}{tag} | Purpose: {purpose}",
+            flush=True,
+        )
+        model = genai.GenerativeModel(model_name)
+        kwargs = {"request_options": request_options}
+        if generation_config:
+            kwargs["generation_config"] = generation_config
+        return model.generate_content(content, **kwargs)
+
+    try:
+        return _call(primary_model)
+    except Exception as primary_err:
+        print(
+            f"[{datetime.now()}] ⚠️  Primary model '{primary_model}' failed "
+            f"({type(primary_err).__name__}: {primary_err}). "
+            f"Waiting {FALLBACK_WAIT_SECONDS}s then switching to fallback '{fallback_model}'...",
+            flush=True,
+        )
+        with open("gemini_debug.log", "a", encoding="utf-8") as f:
+            f.write(
+                f"\n--- [{datetime.now()}] Primary model failed | Purpose: {purpose} ---\n"
+                f"Error: {primary_err}\nSwitching to fallback: {fallback_model}\n"
+            )
+        time.sleep(FALLBACK_WAIT_SECONDS)
+        return _call(fallback_model, label="fallback")
+
+
+# ---------------------------------------------------------------------------
+# Daily Briefing
+# ---------------------------------------------------------------------------
 
 def call_gemini(prompt, max_tokens=2000):
     try:
@@ -9,43 +65,36 @@ def call_gemini(prompt, max_tokens=2000):
             return None
 
         genai.configure(api_key=api_key)
-        model_name = current_app.config.get("GEMINI_MODEL", "gemini-3-flash-preview")
-        model = genai.GenerativeModel(model_name)
-        
-        generation_config = {
+        primary = current_app.config.get("GEMINI_MODEL", PRIMARY_MODEL)
+
+        gen_cfg = {
             "max_output_tokens": max_tokens,
             "temperature": 0.7,
             "top_p": 0.95,
         }
-        
-        # Detailed logging as requested by user
-        purpose = "Daily Briefing Generation"
-        log_msg = f"[{datetime.now()}] Pinging Model: {model_name} | Purpose: {purpose}"
-        print(log_msg, flush=True)
-        
-        response = model.generate_content(
-            prompt,
-            generation_config=generation_config,
-            request_options={"timeout": 90}
+
+        response = _generate_with_fallback(
+            content=prompt,
+            purpose="Daily Briefing Generation",
+            primary_model=primary,
+            generation_config=gen_cfg,
         )
         text = response.text
-        
-        # Log to file for debugging
+
         with open("gemini_debug.log", "a", encoding="utf-8") as f:
-            f.write(f"\n--- {log_msg} ---\n")
-            f.write(f"Response: {text}\n")
-            
+            f.write(f"\n--- [{datetime.now()}] Daily Briefing ---\nResponse: {text}\n")
+
         return text
     except Exception as e:
         with open("gemini_debug.log", "a", encoding="utf-8") as f:
-            f.write(f"\n--- {datetime.now()} Error in Gemini ---\n")
-            f.write(f"{str(e)}\n")
-        print(f"Gemini API Error: {e}")
+            f.write(f"\n--- [{datetime.now()}] Error in Gemini (Briefing) ---\n{e}\n")
+        print(f"Gemini Briefing Error: {e}")
         return None
+
 
 def generate_daily_briefing(user_name, tasks_today, upcoming_expenses, email_summaries, calendar_events):
     today = datetime.now(timezone.utc).strftime("%B %d, %Y")
-    
+
     current_hour = datetime.now().hour
     time_greeting = "morning"
     if 12 <= current_hour < 17:
@@ -71,21 +120,20 @@ Guidelines:
 
     return call_gemini(prompt, max_tokens=800)
 
-import base64
-import json
+
+# ---------------------------------------------------------------------------
+# Document / Image Extraction
+# ---------------------------------------------------------------------------
 
 def extract_data_from_image(image_base64, user_prompt, mime_type="image/jpeg"):
     try:
         api_key = current_app.config.get("GEMINI_API_KEY")
         if not api_key:
             return None
-            
+
         genai.configure(api_key=api_key)
-        # Use the specific lite model as requested
-        model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
-        
         image_data = base64.b64decode(image_base64)
-        
+
         today = datetime.now(timezone.utc).strftime("%B %d, %Y")
         system_prompt = f"""You are a data extraction AI. Today's date is {today}.
 Extract structured data from the provided document image/PDF and the user's prompt. 
@@ -96,16 +144,12 @@ For add_expense return: {{ "action": "add_expense", "name": "", "amount": 0, "du
 If a due date is not explicitly found, try to infer it from the user's prompt or the document, else leave empty. Use absolute dates (YYYY-MM-DD or readable).
 User prompt: {user_prompt}
 """
-        
-        print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Document Extraction", flush=True)
-        response = model.generate_content(
-            [
-                {'mime_type': mime_type, 'data': image_data},
-                system_prompt
-            ],
-            request_options={"timeout": 90}
+
+        response = _generate_with_fallback(
+            content=[{"mime_type": mime_type, "data": image_data}, system_prompt],
+            purpose="Document Extraction",
         )
-        
+
         text = response.text.strip()
         if text.startswith("```json"):
             text = text[7:]
@@ -113,17 +157,21 @@ User prompt: {user_prompt}
             text = text[3:]
         if text.endswith("```"):
             text = text[:-3]
-            
+
         parsed = json.loads(text.strip())
-        
+
         with open("gemini_debug.log", "a", encoding="utf-8") as f:
-            f.write(f"\n--- [{datetime.now()}] Document Extraction ---\n")
-            f.write(f"Response: {text}\n")
-            
+            f.write(f"\n--- [{datetime.now()}] Document Extraction ---\nResponse: {text}\n")
+
         return parsed
     except Exception as e:
         print(f"Gemini Image Processing Error: {e}")
         return None
+
+
+# ---------------------------------------------------------------------------
+# Audio / Voice Note Extraction
+# ---------------------------------------------------------------------------
 
 def extract_data_from_audio(audio_base64, user_prompt="", mime_type="audio/webm"):
     try:
@@ -132,11 +180,8 @@ def extract_data_from_audio(audio_base64, user_prompt="", mime_type="audio/webm"
             return None
 
         genai.configure(api_key=api_key)
-        # Use the specific lite model as requested
-        model = genai.GenerativeModel("gemini-3.1-flash-lite-preview")
-        
         audio_data = base64.b64decode(audio_base64)
-        
+
         today = datetime.now(timezone.utc).strftime("%B %d, %Y")
         system_prompt = f"""You are a data extraction AI. Today's date is {today}.
 Listen to the provided audio voice note and read the user's prompt (if any).
@@ -149,16 +194,12 @@ For add_expense return: {{ "action": "add_expense", "name": "", "amount": 0, "du
 If a due date is not explicitly found, try to infer it from the audio (e.g. "tomorrow"). Use absolute dates (YYYY-MM-DD).
 User prompt (optional context): {user_prompt}
 """
-        
-        print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Audio Extraction", flush=True)
-        response = model.generate_content(
-            [
-                {'mime_type': mime_type, 'data': audio_data},
-                system_prompt
-            ],
-            request_options={"timeout": 90}
+
+        response = _generate_with_fallback(
+            content=[{"mime_type": mime_type, "data": audio_data}, system_prompt],
+            purpose="Audio Extraction",
         )
-        
+
         text = response.text.strip()
         if text.startswith("```json"):
             text = text[7:]
@@ -166,13 +207,12 @@ User prompt (optional context): {user_prompt}
             text = text[3:]
         if text.endswith("```"):
             text = text[:-3]
-            
+
         parsed = json.loads(text.strip())
-        
+
         with open("gemini_debug.log", "a", encoding="utf-8") as f:
-            f.write(f"\n--- [{datetime.now()}] Audio Extraction ---\n")
-            f.write(f"Response: {text}\n")
-            
+            f.write(f"\n--- [{datetime.now()}] Audio Extraction ---\nResponse: {text}\n")
+
         return parsed
     except Exception as e:
         print(f"Gemini Audio Processing Error: {e}")
