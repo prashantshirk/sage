@@ -13,4 +13,3 @@ python-dateutil
 certifi
 apscheduler
 gunicorn
-gevent
