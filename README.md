@@ -237,3 +237,5 @@ There are no scheduled workers. The briefing is only generated on request, not p
 ---
 
 *Built at summer hacks ITM SKILL UNI  by Team PAT*
+*demo video link:-https://drive.google.com/file/d/1pUQrwDPQvOuSgE2CCZ-9_iteEDoWIjnd/view"
+
