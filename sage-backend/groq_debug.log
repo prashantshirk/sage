@@ -1617,3 +1617,56 @@ Messages: [
   }
 ]
 Response: {"action": "add_expense", "name": "Netflix bill", "amount": 649, "due_date": "2026-04-19", "category": "bill", "recurring": true, "recurrence_interval": "monthly", "notes": ""}
+
+--- [2026-04-18 08:00:22.972680] Email Action Item Extraction ---
+Messages: []
+Response: [
+  {
+    "sender_name": "Render",
+    "subject": "Server failure detected on sage-backend",
+    "summary": "Investigate server failure on sage-backend",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pay fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Aakash Prajapati",
+    "subject": "Pending fees",
+    "summary": "Pay 600 rs fees",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "support@groq.com",
+    "subject": "Action Required: Your Active Groq API Key will expire in 7 days",
+    "summary": "Renew Groq API key before expiration",
+    "urgency": "high"
+  },
+  {
+    "sender_name": "Mahesh Yadav",
+    "subject": "This is what \u201clearning AI\u201d should look like (real student builds inside)",
+    "summary": "Respond to direct question from Mahesh Yadav",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Nishant Desai",
+    "subject": "Mumbai AI x OpenClaw: Quick Reminders",
+    "summary": "Respond to meeting reminders from Nishant Desai",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Naukri Campus Jobs",
+    "subject": "Prashant Shirke, Urgent Requirement for the role of Intern",
+    "summary": "Respond to job opportunity from Naukri Campus Jobs",
+    "urgency": "medium"
+  },
+  {
+    "sender_name": "Kimi",
+    "subject": "Shipping: Kimi Batch API (40% cheaper)",
+    "summary": "Respond to shipping update from Kimi",
+    "urgency": "low"
+  }
+]

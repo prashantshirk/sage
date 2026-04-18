@@ -342,10 +342,16 @@ export default function LandingPage() {
                 Your intelligent life operating system — bringing tasks, finance, and AI together in one elegant dashboard.
               </p>
               <div className="flex items-center gap-2 mt-1">
-                {[Github, Twitter, Mail].map((Icon, i) => (
+                {[
+                  { Icon: Github, href: "https://github.com/prashantshirk/sage" },
+                  { Icon: Twitter, href: "https://x.com/prashantshirke_" },
+                  { Icon: Mail, href: "mailto:prashantshirke9324@gmail.com" }
+                ].map(({ Icon, href }, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
                   >
                     <Icon className="w-4 h-4" />

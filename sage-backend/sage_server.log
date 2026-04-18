@@ -2146,3 +2146,27 @@
 2026-04-18 05:14:02,392 [INFO] 127.0.0.1 - - [18/Apr/2026 05:14:02] "GET /auth/google/login HTTP/1.1" 200 -
 2026-04-18 05:14:09,934 [INFO] 127.0.0.1 - - [18/Apr/2026 05:14:09] "OPTIONS /auth/google/login HTTP/1.1" 200 -
 2026-04-18 05:14:10,252 [INFO] 127.0.0.1 - - [18/Apr/2026 05:14:10] "GET /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:23:56,457 [INFO] Sage Backend Starting...
+2026-04-18 07:24:03,420 [INFO] Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-04-18 07:24:03,427 [INFO] Added job "send_morning_briefings" to job store "default"
+2026-04-18 07:24:03,427 [INFO] Scheduler started
+2026-04-18 07:24:03,494 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.30.28.216:5000
+2026-04-18 07:24:03,494 [INFO] [33mPress CTRL+C to quit[0m
+2026-04-18 07:25:39,785 [INFO] 127.0.0.1 - - [18/Apr/2026 07:25:39] "OPTIONS /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:25:40,043 [INFO] 127.0.0.1 - - [18/Apr/2026 07:25:40] "GET /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:27:57,149 [INFO] 127.0.0.1 - - [18/Apr/2026 07:27:57] "OPTIONS /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:27:57,408 [INFO] 127.0.0.1 - - [18/Apr/2026 07:27:57] "GET /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:30:33,609 [INFO] 127.0.0.1 - - [18/Apr/2026 07:30:33] "GET /auth/google/login HTTP/1.1" 200 -
+2026-04-18 07:30:35,667 [INFO] 127.0.0.1 - - [18/Apr/2026 07:30:35] "[33mGET /auth/me HTTP/1.1[0m" 404 -
+2026-04-18 07:30:37,720 [INFO] 127.0.0.1 - - [18/Apr/2026 07:30:37] "[31m[1mGET /api/nlp/suggestions HTTP/1.1[0m" 401 -
+2026-04-18 07:30:39,768 [INFO] 127.0.0.1 - - [18/Apr/2026 07:30:39] "GET /api/nlp/suggestions HTTP/1.1" 200 -
+2026-04-18 07:31:15,305 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 07:31:15,626 [INFO] 127.0.0.1 - - [18/Apr/2026 07:31:15] "POST /api/nlp/process HTTP/1.1" 200 -
+2026-04-18 07:32:16,000 [INFO] 127.0.0.1 - - [18/Apr/2026 07:32:16] "POST /api/nlp/process HTTP/1.1" 200 -
+2026-04-18 08:00:00,015 [INFO] Running job "send_morning_briefings (trigger: cron[hour='8', minute='0'], next run at: 2026-04-18 08:00:00 IST)" (scheduled at 2026-04-18 08:00:00+05:30)
+2026-04-18 08:00:02,241 [INFO] file_cache is only supported with oauth2client<4.0.0
+2026-04-18 08:00:22,969 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-18 08:01:16,539 [INFO] Job "send_morning_briefings (trigger: cron[hour='8', minute='0'], next run at: 2026-04-19 08:00:00 IST)" executed successfully
