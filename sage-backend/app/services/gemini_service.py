@@ -23,7 +23,11 @@ def call_gemini(prompt, max_tokens=2000):
         log_msg = f"[{datetime.now()}] Pinging Model: {model_name} | Purpose: {purpose}"
         print(log_msg, flush=True)
         
-        response = model.generate_content(prompt, generation_config=generation_config)
+        response = model.generate_content(
+            prompt,
+            generation_config=generation_config,
+            request_options={"timeout": 90}
+        )
         text = response.text
         
         # Log to file for debugging
@@ -94,10 +98,13 @@ User prompt: {user_prompt}
 """
         
         print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Document Extraction", flush=True)
-        response = model.generate_content([
-            {'mime_type': mime_type, 'data': image_data},
-            system_prompt
-        ])
+        response = model.generate_content(
+            [
+                {'mime_type': mime_type, 'data': image_data},
+                system_prompt
+            ],
+            request_options={"timeout": 90}
+        )
         
         text = response.text.strip()
         if text.startswith("```json"):
@@ -144,10 +151,13 @@ User prompt (optional context): {user_prompt}
 """
         
         print(f"[{datetime.now()}] Pinging Model: gemini-3.1-flash-lite-preview | Purpose: Audio Extraction", flush=True)
-        response = model.generate_content([
-            {'mime_type': mime_type, 'data': audio_data},
-            system_prompt
-        ])
+        response = model.generate_content(
+            [
+                {'mime_type': mime_type, 'data': audio_data},
+                system_prompt
+            ],
+            request_options={"timeout": 90}
+        )
         
         text = response.text.strip()
         if text.startswith("```json"):
