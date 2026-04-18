@@ -559,3 +559,6 @@ Response: {
   "category": "bill",
   "notes": "Consumer No: 000093887042, Billing Unit: 4641/AIROLI S/DN./WASHI DIVISION. Pay by 2019-12-19 for Rs. 1720.00 or pay by 2019-12-30 for Rs. 1730.00."
 }
+
+--- [2026-04-18 07:32:15.933514] Audio Extraction ---
+Response: { "action": "add_task", "title": "test reminder", "note": "", "due_date": "2026-04-19", "due_time": "", "category": "personal" }

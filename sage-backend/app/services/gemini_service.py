@@ -5,44 +5,49 @@ import base64
 import json
 import time
 
-# Primary model for audio/image extraction and briefings
-PRIMARY_MODEL = "gemini-3.1-flash-lite-preview"
-# Fallback model used when the primary doesn't respond within the timeout
-FALLBACK_MODEL = "gemini-2.5-flash-lite"
+# Primary model — confirmed working as of 2026-04-18
+PRIMARY_MODEL = "gemini-2.5-flash-lite"
+# Fallback model — kept for resilience; currently 504-ing but may recover
+FALLBACK_MODEL = "gemini-3.1-flash-lite-preview"
+
+# Timeout for primary model call. Keep short so we fail fast and hit the
+# fallback quickly rather than hanging for the full gunicorn timeout.
+PRIMARY_TIMEOUT = 25
+# Fallback gets the full budget
+FALLBACK_TIMEOUT = 90
 
 # Seconds to wait before retrying with the fallback model
-FALLBACK_WAIT_SECONDS = 3
+FALLBACK_WAIT_SECONDS = 2
 
 
 def _generate_with_fallback(content, purpose, primary_model=PRIMARY_MODEL,
                              fallback_model=FALLBACK_MODEL,
-                             generation_config=None, timeout=90):
+                             generation_config=None):
     """
-    Try `primary_model` first. If it raises any exception (timeout, quota,
-    API error, etc.) wait FALLBACK_WAIT_SECONDS then retry with `fallback_model`.
+    Try `primary_model` first with PRIMARY_TIMEOUT (short, so we fail fast).
+    If it raises any exception (timeout, quota, API error, etc.) wait
+    FALLBACK_WAIT_SECONDS then retry with `fallback_model` using FALLBACK_TIMEOUT.
     Returns the raw response object, or raises if the fallback also fails.
     """
-    request_options = {"timeout": timeout}
-
-    def _call(model_name, label=""):
+    def _call(model_name, call_timeout, label=""):
         tag = f" ({label})" if label else ""
         print(
             f"[{datetime.now()}] Pinging Model: {model_name}{tag} | Purpose: {purpose}",
             flush=True,
         )
         model = genai.GenerativeModel(model_name)
-        kwargs = {"request_options": request_options}
+        kwargs = {"request_options": {"timeout": call_timeout}}
         if generation_config:
             kwargs["generation_config"] = generation_config
         return model.generate_content(content, **kwargs)
 
     try:
-        return _call(primary_model)
+        return _call(primary_model, PRIMARY_TIMEOUT)
     except Exception as primary_err:
         print(
-            f"[{datetime.now()}] ⚠️  Primary model '{primary_model}' failed "
-            f"({type(primary_err).__name__}: {primary_err}). "
-            f"Waiting {FALLBACK_WAIT_SECONDS}s then switching to fallback '{fallback_model}'...",
+            f"[{datetime.now()}] WARNING: Primary model '{primary_model}' failed "
+            f"({type(primary_err).__name__}: {str(primary_err)[:80]}). "
+            f"Waiting {FALLBACK_WAIT_SECONDS}s then trying '{fallback_model}'...",
             flush=True,
         )
         with open("gemini_debug.log", "a", encoding="utf-8") as f:
@@ -51,7 +56,7 @@ def _generate_with_fallback(content, purpose, primary_model=PRIMARY_MODEL,
                 f"Error: {primary_err}\nSwitching to fallback: {fallback_model}\n"
             )
         time.sleep(FALLBACK_WAIT_SECONDS)
-        return _call(fallback_model, label="fallback")
+        return _call(fallback_model, FALLBACK_TIMEOUT, label="fallback")
 
 
 # ---------------------------------------------------------------------------

@@ -1608,3 +1608,12 @@ Messages: [
   }
 ]
 Response: {"action": "add_reminder", "title": "brush", "due_date": "2026-04-17", "note": ""}
+
+--- [2026-04-18 07:31:15.343551] NLP Input Parsing ---
+Messages: [
+  {
+    "role": "user",
+    "content": "Netflix bill due tomorrow \u20b9649"
+  }
+]
+Response: {"action": "add_expense", "name": "Netflix bill", "amount": 649, "due_date": "2026-04-19", "category": "bill", "recurring": true, "recurrence_interval": "monthly", "notes": ""}
