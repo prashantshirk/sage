@@ -5,15 +5,14 @@ import base64
 import json
 import time
 
-# Primary model — confirmed working as of 2026-04-18
-PRIMARY_MODEL = "gemini-2.5-flash-lite"
-# Fallback model — kept for resilience; currently 504-ing but may recover
-FALLBACK_MODEL = "gemini-3.1-flash-lite-preview"
+# Primary model — give it plenty of time as it can be slow
+PRIMARY_MODEL = "gemini-3.1-flash-lite-preview"
+# Fallback used only when primary doesn't reply in time
+FALLBACK_MODEL = "gemini-2.5-flash-lite"
 
-# Timeout for primary model call. Keep short so we fail fast and hit the
-# fallback quickly rather than hanging for the full gunicorn timeout.
-PRIMARY_TIMEOUT = 25
-# Fallback gets the full budget
+# Give the primary model up to 70s before giving up and trying the fallback
+PRIMARY_TIMEOUT = 70
+# Fallback gets the remaining budget
 FALLBACK_TIMEOUT = 90
 
 # Seconds to wait before retrying with the fallback model
